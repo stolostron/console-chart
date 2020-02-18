@@ -17,7 +17,7 @@ metadata:
     app.kubernetes.io/name: {{ template "console.name" . }}
     helm.sh/chart: {{ template "console.chart" . }}
 spec:
-  replicas: {{ .Values.global.replicas }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: {{ template "console.name" . }}
@@ -55,7 +55,7 @@ spec:
               - key: beta.kubernetes.io/arch
                 operator: In
                 values:
-                {{- range .Values.global.arch }}
+                {{- range .Values.arch }}
                 - {{ . }}
                 {{- end }}
         podAntiAffinity:
@@ -90,38 +90,38 @@ spec:
           readOnlyRootFilesystem: true
         env:
         - name: ICP_STANDALONE
-          value: "{{ .Values.global.standalone }}"
+          value: "{{ .Values.standalone }}"
         - name: MONGO_USERNAME
           valueFrom:
               secretKeyRef:
                 key: user
-                name: {{ .Values.global.mongo.usersecret }}
+                name: {{ .Values.mongo.usersecret }}
         - name: MONGO_PASSWORD
           valueFrom:
               secretKeyRef:
                 key: password
-                name: {{ .Values.global.mongo.usersecret }}
-        {{- if .Values.global.mongo.casecret }}
+                name: {{ .Values.mongo.usersecret }}
+        {{- if .Values.mongo.casecret }}
         - name: MONGO_SSLCA
           value: /certs/mongodb-ca/tls.crt
         {{- end }}
-        {{- if .Values.global.mongo.tlssecret }}
+        {{- if .Values.mongo.tlssecret }}
         - name: MONGO_SSLCERT
           value: /certs/mongodb-client/tls.crt
         - name: MONGO_SSLKEY
           value: /certs/mongodb-client/tls.key
         {{- end }}
         - name: cfcRouterUrl
-          value: {{ .Values.global.cfcRouterUrl }}
+          value: {{ .Values.cfcRouterUrl }}
         - name: hcmApiVersion
           value: V2
         - name: PLATFORM_IDENTITY_PROVIDER_URL
-          value: {{ .Values.global.cfcRouterUrl }}/idprovider
+          value: {{ .Values.cfcRouterUrl }}/idprovider
         - name: mongodbUrl
-          value: 'mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@{{ .Values.global.mongo.servers }}/{{ .Values.global.mongo.dbName }}'
+          value: 'mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@{{ .Values.mongo.servers }}/{{ .Values.mongo.dbName }}'
         - name: complianceNamespace
-          value: {{- if (.Values.global.compliance.mcmNamespace) }}
-            {{ .Values.global.compliance.mcmNamespace }}
+          value: {{- if (.Values.compliance.mcmNamespace) }}
+            {{ .Values.compliance.mcmNamespace }}
             {{- else }}
             {{ .Release.Namespace }}
             {{- end }}
@@ -151,15 +151,15 @@ spec:
         volumeMounts:
         - name: uiapi-certs
           mountPath: /opt/ibm/mcm-ui-api/sslcert
-        {{- if .Values.global.mongo.tlssecret }}
+        {{- if .Values.mongo.tlssecret }}
         - name: mongodb-ca-cert
           mountPath: /certs/mongodb-ca
         - name: mongodb-client-cert
           mountPath: /certs/mongodb-client
         {{- end }}
-      {{- if .Values.global.pullSecret }}
+      {{- if .Values.pullSecret }}
       imagePullSecrets:
-      - name: {{ .Values.global.pullSecret }}
+      - name: {{ .Values.pullSecret }}
       {{- end }}
       volumes:
       - name: uiapi-certs
@@ -172,24 +172,24 @@ spec:
             path: consoleapi.crt
           - key: tls.key
             path: consoleapi.key
-      {{- if .Values.global.mongo.casecret }}
+      {{- if .Values.mongo.casecret }}
       - name: mongodb-ca-cert
         secret:
           defaultMode: 420
-          secretName: {{ .Values.global.mongo.casecret }}
+          secretName: {{ .Values.mongo.casecret }}
       {{- end }}
-      {{- if .Values.global.mongo.tlssecret }}
+      {{- if .Values.mongo.tlssecret }}
       - name: mongodb-client-cert
         secret:
           defaultMode: 420
-          secretName: {{ .Values.global.mongo.tlssecret }}
+          secretName: {{ .Values.mongo.tlssecret }}
       {{- end }}
-      {{- if .Values.global.nodeSelector.enabled }}
+      {{- if .Values.nodeSelector.enabled }}
       nodeSelector:
-      {{- if .Values.global.nodeSelector.os }}
-        "beta.kubernetes.io/os" : {{ .Values.global.nodeSelector.os }}
+      {{- if .Values.nodeSelector.os }}
+        "beta.kubernetes.io/os" : {{ .Values.nodeSelector.os }}
       {{- end }}
-      {{- if .Values.global.nodeSelector.customLabelSelector }}
-        {{ .Values.global.nodeSelector.customLabelSelector }} : {{ .Values.global.nodeSelector.customLabelValue}}
+      {{- if .Values.nodeSelector.customLabelSelector }}
+        {{ .Values.nodeSelector.customLabelSelector }} : {{ .Values.nodeSelector.customLabelValue}}
       {{- end }}
       {{- end }}

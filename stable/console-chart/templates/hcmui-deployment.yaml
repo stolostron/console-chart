@@ -17,7 +17,7 @@ metadata:
     app.kubernetes.io/name: {{ template "console.name" . }}
     helm.sh/chart: {{ template "console.chart" . }}
 spec:
-  replicas: {{ .Values.global.replicas }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: {{ template "console.name" . }}
@@ -55,7 +55,7 @@ spec:
               - key: beta.kubernetes.io/arch
                 operator: In
                 values:
-                {{- range .Values.global.arch }}
+                {{- range .Values.arch }}
                 - {{ . }}
                 {{- end }}
         podAntiAffinity:
@@ -90,17 +90,17 @@ spec:
           readOnlyRootFilesystem: true
         env:
         - name: ICP_STANDALONE
-          value: "{{ .Values.global.standalone }}"
+          value: "{{ .Values.standalone }}"
         - name: hcmUiApiUrl
           value: https://{{ template "console.fullname" . }}-consoleapi:4000/hcmuiapi
         - name: searchApiUrl
           value: https://search-search-api:4010/searchapi
         - name: cfcRouterUrl
-          value: {{ .Values.global.cfcRouterUrl }}
+          value: {{ .Values.cfcRouterUrl }}
         - name: leftNav
           value: {{ .Release.Name }}-nav
         - name: PLATFORM_IDENTITY_PROVIDER_URL
-          value: {{ .Values.global.cfcRouterUrl }}/idprovider
+          value: {{ .Values.cfcRouterUrl }}/idprovider
         - name: WLP_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -134,16 +134,16 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-      {{- if .Values.global.pullSecret }}
+      {{- if .Values.pullSecret }}
       imagePullSecrets:
-      - name: {{ .Values.global.pullSecret }}
+      - name: {{ .Values.pullSecret }}
       {{- end }}
-      {{- if .Values.global.nodeSelector.enabled }}
+      {{- if .Values.nodeSelector.enabled }}
       nodeSelector:
-      {{- if .Values.global.nodeSelector.os }}
-        "beta.kubernetes.io/os" : {{ .Values.global.nodeSelector.os }}
+      {{- if .Values.nodeSelector.os }}
+        "beta.kubernetes.io/os" : {{ .Values.nodeSelector.os }}
       {{- end }}
-      {{- if .Values.global.nodeSelector.customLabelSelector }}
-        {{ .Values.global.nodeSelector.customLabelSelector }} : {{ .Values.global.nodeSelector.customLabelValue}}
+      {{- if .Values.nodeSelector.customLabelSelector }}
+        {{ .Values.nodeSelector.customLabelSelector }} : {{ .Values.nodeSelector.customLabelValue}}
       {{- end }}
       {{- end }}
