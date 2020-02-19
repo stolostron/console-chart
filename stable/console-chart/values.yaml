@@ -32,6 +32,7 @@ compliance:
 cfcRouterUrl: "https://icp-management-ingress:443"
 
 enabled: true
+
 consoleui:
   image:
     repository: quay.io/open-cluster-management/console-ui
@@ -44,18 +45,7 @@ consoleui:
     limits:
       memory: "512Mi"
       cpu: "300m"
-mcmapplicationui:
-  image:
-    repository: quay.io/open-cluster-management/mcm-application-ui
-    tag: 3.5.0
-    pullPolicy: Always
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "100m"
-    limits:
-      memory: "512Mi"
-      cpu: "400m"
+
 consoleapi:
   image:
     repository: quay.io/open-cluster-management/console-api
