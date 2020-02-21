@@ -36,9 +36,8 @@ spec:
         app.kubernetes.io/name: {{ template "console.name" . }}
         helm.sh/chart: {{ template "console.chart" . }}
       annotations:
-        productName: "IBM Multicloud Manager - Server"
-        productID: "317a72a4f22645aaa1b7a07a83c60af5"
-        productVersion: "3.1.1"
+        productName: "Open Cluster Management - Server"
+        productVersion: "1.0.0"
         seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       hostNetwork: false
@@ -75,7 +74,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: hcm-ui-api
-        image: "{{ .Values.consoleapi.image.repository }}:{{ .Values.consoleapi.image.tag }}"
+        image: "{{ .Values.consoleapi.image.repository }}:{{ .Values.consoleapi.image.tag }}{{ .Values.imageTagPostfix }}"
         imagePullPolicy: {{ .Values.consoleapi.image.pullPolicy }}
         resources:
         {{- toYaml .Values.consoleapi.resources | nindent 10 }}
@@ -89,8 +88,6 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         env:
-        - name: ICP_STANDALONE
-          value: "{{ .Values.standalone }}"
         - name: MONGO_USERNAME
           valueFrom:
               secretKeyRef:
@@ -115,8 +112,6 @@ spec:
           value: {{ .Values.cfcRouterUrl }}
         - name: hcmApiVersion
           value: V2
-        - name: PLATFORM_IDENTITY_PROVIDER_URL
-          value: {{ .Values.cfcRouterUrl }}/idprovider
         - name: mongodbUrl
           value: 'mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@{{ .Values.mongo.servers }}/{{ .Values.mongo.dbName }}'
         - name: complianceNamespace
@@ -150,7 +145,7 @@ spec:
           timeoutSeconds: 1
         volumeMounts:
         - name: uiapi-certs
-          mountPath: /opt/ibm/mcm-ui-api/sslcert
+          mountPath: /opt/app-root/console-api/sslcert
         {{- if .Values.mongo.tlssecret }}
         - name: mongodb-ca-cert
           mountPath: /certs/mongodb-ca

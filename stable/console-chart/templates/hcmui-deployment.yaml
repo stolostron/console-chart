@@ -36,9 +36,8 @@ spec:
         app.kubernetes.io/name: {{ template "console.name" . }}
         helm.sh/chart: {{ template "console.chart" . }}
       annotations:
-        productName: "IBM Multicloud Manager - Server"
-        productID: "317a72a4f22645aaa1b7a07a83c60af5"
-        productVersion: "3.1.1"
+        productName: "Open Cluster Management - Server"
+        productVersion: "1.0.0"
         seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       hostNetwork: false
@@ -75,7 +74,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: hcm-ui
-        image: "{{ .Values.consoleui.image.repository }}:{{ .Values.consoleui.image.tag }}"
+        image: "{{ .Values.consoleui.image.repository }}:{{ .Values.consoleui.image.tag }}{{ .Values.imageTagPostfix }}"
         imagePullPolicy: {{ .Values.consoleui.image.pullPolicy }}
         resources:
         {{- toYaml .Values.consoleui.resources | nindent 10 }}
@@ -89,8 +88,6 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         env:
-        - name: ICP_STANDALONE
-          value: "{{ .Values.standalone }}"
         - name: hcmUiApiUrl
           value: https://{{ template "console.fullname" . }}-consoleapi:4000/hcmuiapi
         - name: searchApiUrl
@@ -99,18 +96,6 @@ spec:
           value: {{ .Values.cfcRouterUrl }}
         - name: leftNav
           value: {{ .Release.Name }}-nav
-        - name: PLATFORM_IDENTITY_PROVIDER_URL
-          value: {{ .Values.cfcRouterUrl }}/idprovider
-        - name: WLP_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: WLP_CLIENT_ID
-              name: platform-oidc-credentials
-        - name: WLP_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: WLP_CLIENT_SECRET
-              name: platform-oidc-credentials
         ports:
         - containerPort: 3000
           protocol: TCP
