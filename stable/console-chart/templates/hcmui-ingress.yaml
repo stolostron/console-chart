@@ -1,0 +1,31 @@
+# Licensed Materials - Property of IBM
+# (C) Copyright IBM Corporation 2016, 2019 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    icp.management.ibm.com/auth-type: access-token
+    kubernetes.io/ingress.class: ibm-icp-management
+    icp.management.ibm.com/configuration-snippet: |
+        add_header 'X-XSS-Protection' '1' always;
+        add_header Content-Security-Policy "default-src 'none'; font-src 'unsafe-inline' 'self'; script-src 'unsafe-inline' 'self' blob: cdn.segment.com fast.appcues.com; connect-src 'self' https://api.segment.io wss://api.appcues.net https://notify.bugsnag.com; img-src * data:; frame-src 'self' https://my.appcues.com; style-src 'unsafe-inline' 'self' https://fast.appcues.com";
+  name: {{ template "console.fullname" . }}-consoleui
+  labels:
+    app: {{ template "console.name" . }}
+    chart: {{ template "console.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: {{ template "console.fullname" . }}-consoleui
+          servicePort: 3000
+        path: /multicloud

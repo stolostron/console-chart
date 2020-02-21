@@ -1,0 +1,190 @@
+# Licensed Materials - Property of IBM
+# (C) Copyright IBM Corporation 2016, 2019 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "console.fullname" . }}-consoleapi
+  labels:
+    app: {{ template "console.name" . }}
+    chart: {{ template "console.chart" . }}
+    component: "consoleapi"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "console.name" . }}
+      component: "consoleapi"
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "console.name" . }}
+        component: "consoleapi"
+        release: {{ .Release.Name }}
+        chart: {{ template "console.chart" . }}
+        heritage: {{ .Release.Service }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        app.kubernetes.io/name: {{ template "console.name" . }}
+        helm.sh/chart: {{ template "console.chart" . }}
+      annotations:
+        productName: "Open Cluster Management - Server"
+        productVersion: "1.0.0"
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+    spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                {{- range .Values.arch }}
+                - {{ . }}
+                {{- end }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: component
+                  operator: In
+                  values:
+                  - consoleapi
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+      tolerations:
+        - key: dedicated
+          operator: Exists
+          effect: NoSchedule
+      containers:
+      - name: hcm-ui-api
+        image: "{{ .Values.consoleapi.image.repository }}:{{ .Values.consoleapi.image.tag }}{{ .Values.imageTagPostfix }}"
+        imagePullPolicy: {{ .Values.consoleapi.image.pullPolicy }}
+        resources:
+        {{- toYaml .Values.consoleapi.resources | nindent 10 }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+        env:
+        - name: MONGO_USERNAME
+          valueFrom:
+              secretKeyRef:
+                key: user
+                name: {{ .Values.mongo.usersecret }}
+        - name: MONGO_PASSWORD
+          valueFrom:
+              secretKeyRef:
+                key: password
+                name: {{ .Values.mongo.usersecret }}
+        {{- if .Values.mongo.casecret }}
+        - name: MONGO_SSLCA
+          value: /certs/mongodb-ca/tls.crt
+        {{- end }}
+        {{- if .Values.mongo.tlssecret }}
+        - name: MONGO_SSLCERT
+          value: /certs/mongodb-client/tls.crt
+        - name: MONGO_SSLKEY
+          value: /certs/mongodb-client/tls.key
+        {{- end }}
+        - name: cfcRouterUrl
+          value: {{ .Values.cfcRouterUrl }}
+        - name: hcmApiVersion
+          value: V2
+        - name: mongodbUrl
+          value: 'mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@{{ .Values.mongo.servers }}/{{ .Values.mongo.dbName }}'
+        - name: complianceNamespace
+          value: {{- if (.Values.compliance.mcmNamespace) }}
+            {{ .Values.compliance.mcmNamespace }}
+            {{- else }}
+            {{ .Release.Namespace }}
+            {{- end }}
+        ports:
+        - containerPort: 4000
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /livenessProbe
+            port: 4000
+            scheme: HTTPS
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readinessProbe
+            port: 4000
+            scheme: HTTPS
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - name: uiapi-certs
+          mountPath: /opt/app-root/console-api/sslcert
+        {{- if .Values.mongo.tlssecret }}
+        - name: mongodb-ca-cert
+          mountPath: /certs/mongodb-ca
+        - name: mongodb-client-cert
+          mountPath: /certs/mongodb-client
+        {{- end }}
+      {{- if .Values.pullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.pullSecret }}
+      {{- end }}
+      volumes:
+      - name: uiapi-certs
+        secret:
+          secretName: {{ template "console.fullname" . }}-uiapi-secrets
+          items:
+          - key: ca.crt
+            path: consoleapica.crt
+          - key: tls.crt
+            path: consoleapi.crt
+          - key: tls.key
+            path: consoleapi.key
+      {{- if .Values.mongo.casecret }}
+      - name: mongodb-ca-cert
+        secret:
+          defaultMode: 420
+          secretName: {{ .Values.mongo.casecret }}
+      {{- end }}
+      {{- if .Values.mongo.tlssecret }}
+      - name: mongodb-client-cert
+        secret:
+          defaultMode: 420
+          secretName: {{ .Values.mongo.tlssecret }}
+      {{- end }}
+      {{- if .Values.nodeSelector.enabled }}
+      nodeSelector:
+      {{- if .Values.nodeSelector.os }}
+        "beta.kubernetes.io/os" : {{ .Values.nodeSelector.os }}
+      {{- end }}
+      {{- if .Values.nodeSelector.customLabelSelector }}
+        {{ .Values.nodeSelector.customLabelSelector }} : {{ .Values.nodeSelector.customLabelValue}}
+      {{- end }}
+      {{- end }}
