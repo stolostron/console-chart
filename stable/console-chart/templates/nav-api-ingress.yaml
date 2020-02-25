@@ -1,0 +1,30 @@
+# Licensed Materials - Property of IBM
+# (C) Copyright IBM Corporation 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "console.fullname" . }}-api
+  labels:
+    app: {{ template "console.fullname" . }}
+    chart: {{ template "console.chart" . }}
+    release: {{ template "console.fullname" . }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    kubernetes.io/ingress.class: "ibm-icp-management"
+    icp.management.ibm.com/configuration-snippet: |
+        add_header 'X-XSS-Protection' '1' always;
+        add_header Content-Security-Policy "default-src 'none'; font-src 'unsafe-inline' 'self'; script-src 'unsafe-inline' 'self' blob: cdn.segment.com fast.appcues.com; connect-src 'self' https://api.segment.io wss://api.appcues.net https://notify.bugsnag.com; img-src * data:; frame-src 'self' https://my.appcues.com; style-src 'unsafe-inline' 'self' https://fast.appcues.com";
+spec:
+  rules:
+    - http:
+        paths:
+          - path: "{{ .Values.consoleheader.ingressPath }}/api/"
+            backend:
+              serviceName: {{ template "console.fullname" . }}
+              servicePort: 3000
+          - path: "{{ .Values.consoleheader.ingressPath }}/logout/"
+            backend:
+              serviceName: {{ template "console.fullname" . }}
+              servicePort: 3000

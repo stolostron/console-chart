@@ -1,0 +1,26 @@
+# Licensed Materials - Property of IBM
+# (C) Copyright IBM Corporation 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "console.fullname" . }}-config
+  labels:
+    app: {{ template "console.fullname" . }}
+    chart: {{ template "console.chart" . }}
+    release: {{ template "console.fullname" . }}
+    heritage: {{ .Release.Service }}
+data:
+  ui-config.json: |-
+    {
+      "icpText": "{{ .Values.consoleheader.uiconfig.icpText }}",
+      "about": {
+        "path": "{{ .Values.consoleheader.uiconfig.about.text }}"
+      },
+      "header": {
+        "path": "{{ .Values.consoleheader.uiconfig.header.path }}",
+        "width": "{{ .Values.consoleheader.uiconfig.header.width }}",
+        "height": "{{ .Values.consoleheader.uiconfig.header.height }}"
+      }
+    }
