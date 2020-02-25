@@ -20,13 +20,6 @@ nodeSelector:
   os: ""
   customLabelSelector: ""
   customLabelValue: ""
-mongo:
-  servers: mongodb
-  dbName: mcm
-  usersecret: icp-mongodb-admin
-  tlssecret: cluster-ca-cert
-  casecret: cluster-ca-cert
-  replicaSet: rs0
 compliance:
   mcmNamespace: null
 cfcRouterUrl: "https://icp-management-ingress:443"

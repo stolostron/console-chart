@@ -88,32 +88,10 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         env:
-        - name: MONGO_USERNAME
-          valueFrom:
-              secretKeyRef:
-                key: user
-                name: {{ .Values.mongo.usersecret }}
-        - name: MONGO_PASSWORD
-          valueFrom:
-              secretKeyRef:
-                key: password
-                name: {{ .Values.mongo.usersecret }}
-        {{- if .Values.mongo.casecret }}
-        - name: MONGO_SSLCA
-          value: /certs/mongodb-ca/tls.crt
-        {{- end }}
-        {{- if .Values.mongo.tlssecret }}
-        - name: MONGO_SSLCERT
-          value: /certs/mongodb-client/tls.crt
-        - name: MONGO_SSLKEY
-          value: /certs/mongodb-client/tls.key
-        {{- end }}
         - name: cfcRouterUrl
           value: {{ .Values.cfcRouterUrl }}
         - name: hcmApiVersion
           value: V2
-        - name: mongodbUrl
-          value: 'mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@{{ .Values.mongo.servers }}/{{ .Values.mongo.dbName }}'
         - name: complianceNamespace
           value: {{- if (.Values.compliance.mcmNamespace) }}
             {{ .Values.compliance.mcmNamespace }}
@@ -146,12 +124,6 @@ spec:
         volumeMounts:
         - name: uiapi-certs
           mountPath: /opt/app-root/console-api/sslcert
-        {{- if .Values.mongo.tlssecret }}
-        - name: mongodb-ca-cert
-          mountPath: /certs/mongodb-ca
-        - name: mongodb-client-cert
-          mountPath: /certs/mongodb-client
-        {{- end }}
       {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
@@ -167,18 +139,6 @@ spec:
             path: consoleapi.crt
           - key: tls.key
             path: consoleapi.key
-      {{- if .Values.mongo.casecret }}
-      - name: mongodb-ca-cert
-        secret:
-          defaultMode: 420
-          secretName: {{ .Values.mongo.casecret }}
-      {{- end }}
-      {{- if .Values.mongo.tlssecret }}
-      - name: mongodb-client-cert
-        secret:
-          defaultMode: 420
-          secretName: {{ .Values.mongo.tlssecret }}
-      {{- end }}
       {{- if .Values.nodeSelector.enabled }}
       nodeSelector:
       {{- if .Values.nodeSelector.os }}
