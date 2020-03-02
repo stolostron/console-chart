@@ -8,7 +8,7 @@ metadata:
   labels:
     name: {{ .Release.Name }}-nav
     app: {{ template "console.name" . }}
-    component: "mcmnav"
+    component: "console-nav"
     chart: {{ template "console.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -20,13 +20,13 @@ metadata:
 spec:
   header:
     logoUrl: "/multicloud/header/graphics/RHACM-Logo.svg"
-    logoAltText: "Red Hat Advanced Container Management"
+    logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
     docUrlMapping: "https://www.ibm.com/support/knowledgecenter/SSFC4F_1.2.0/kc_welcome_cloud_pak.html"
     supportUrl: "https://ibm.biz/icpsupport"
     gettingStartedUrl: "/multicloud/welcome"
   about:
     logoUrl: "/multicloud/header/graphics/MCM-AboutModal-TextLogo.svg"
-    logoAltText: "Cloud Pak for Multicloud Management"
+    logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
     licenses:
     - "Ansible: © 2017 Red Hat, Inc., http://www.redhat.com; © Henry Graham (hzgraham) <Henry.Graham@mail.wvu.edu>"
     - "calico-bird: © 1998–2008, Martin Mares <mj@ucw.cz>; © 1998–2000, Pavel Machek <pavel@ucw.cz>; © 1998–2008, Ondrej Filip <feela@network.cz>; © 2009–2013,  CZ.NIC z.s.p.o."
@@ -96,8 +96,7 @@ spec:
     - "MongoDB, version 4.0.12, SSPL"
     - "ffi (Ruby Gem), 1.11.1, GPL"
     copyright: "© 2018, 2019 IBM. All rights reserved."
-    version: "1.2.0"
-    edition: "Enterprise"
+    version: "1.0.0"
   logoutRedirects:
     - /cemui/logout
   navItems:
@@ -134,34 +133,4 @@ spec:
       label: "Govern risk"
       url: "/multicloud/policies"
       serviceId: "grc-ui"
-    - id: "monitor"
-      label: "Monitor health"
-    - id: "incidents"
-      label: "Incidents"
-      url: "/cemui/launch"
-      serviceId: "cem-ui"
-      parentId: "monitor"
-      detectionLabelSelector: "component=cem-event-analytics-ui"
-      detectionNamespace: "kube-system"
-    - id: "app-monitoring"
-      label: "App monitoring"
-      url: "/cemui/launch/applications"
-      serviceId: "icam-ui"
-      parentId: "monitor"
-      detectionLabelSelector: "component=icam-ui"
-      detectionNamespace: "kube-system"
-    - id: "infra-monitoring"
-      label: "Infrastructure monitoring"
-      url: "/cemui/launch/resources"
-      serviceId: "icam-ui"
-      parentId: "monitor"
-      detectionLabelSelector: "component=icam-ui"
-      detectionNamespace: "kube-system"
-    - id: "administer-mcm"
-      label: "Administer"
-    - id: "id-access"
-      label: "Identity and access"
-      url: "/multicloud/header/error"
-      serviceId: "webui-nav"
-      parentId: "administer-mcm"
 

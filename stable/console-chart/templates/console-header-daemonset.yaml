@@ -31,8 +31,6 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
         seccomp.security.alpha.kubernetes.io/pod: docker/default
-        productName: "IBM Multicloud Manager - Server"
-        productID: "317a72a4f22645aaa1b7a07a83c60af5"
     spec:
       affinity:
         nodeAffinity:
@@ -74,7 +72,7 @@ spec:
       hostPID: false
       hostIPC: false
       containers:
-        - image: {{ .Values.consoleheader.image.repository }}:{{ .Values.consoleheader.image.tag }}
+        - image: image: "{{ .Values.consoleheader.image.repository}}/{{.Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
           resources:
 {{ toYaml .Values.consoleheader.resources | indent 12 }}
           imagePullPolicy: {{ .Values.consoleheader.image.pullPolicy }}
@@ -108,7 +106,7 @@ spec:
           volumeMounts:
           - name: log4js
             mountPath: /etc/config
-          - mountPath: /opt/ibm/console-header/certs
+          - mountPath: /opt/app-root/console-header/certs
             name: cluster-ca
           env:
             - name: headerContextPath
@@ -116,7 +114,7 @@ spec:
             - name: headerUrl
               value: {{ .Values.cfcRouterUrl }}
             - name: NODE_EXTRA_CA_CERTS
-              value: /opt/ibm/console-header/certs/ca.crt
+              value: /opt/app-root/console-header/certs/ca.crt
             - name: NAV_PORT
               value: "{{ .Values.navPort }}"
             - name: default_admin_user

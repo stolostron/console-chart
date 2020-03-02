@@ -64,6 +64,7 @@ consoleapi:
     ingressPath: '/multicloud/header'
     image:
       repository: quay.io/open-cluster-management/console-header
+      name: console-header
       tag: 1.0.0
       pullPolicy: Always
     resources:
@@ -74,10 +75,10 @@ consoleapi:
         memory: "512Mi"
         cpu: "300m"
     uiconfig:
-      icpText: "Red Hat Advanced Container Management for Kubernetes"
+      icpText: "Red Hat Advanced Cluster Management for Kubernetes for Kubernetes"
       about:
-        text: "Red Hat Advanced Container Management for Kubernetes"
-        logoAltText: "Red Hat Advanced Container Management for Kubernetes"
+        text: "Red Hat Advanced Cluster Management for Kubernetes for Kubernetes"
+        logoAltText: "Red Hat Advanced Cluster Management for Kubernetes for Kubernetes"
         edition: "Enterprise"
       header:
         path: "/multicloud/header/graphics/RHACM-logo.svg"
@@ -85,4 +86,4 @@ consoleapi:
         height: "18px"
         supportUrl: "https://ibm.biz/icpsupport"
         docUrlMapping: "/examples/header/custom"
-        logoAltText: "Red Hat Advanced Container Management for Kubernetes"
+        logoAltText: "Red Hat Advanced Cluster Management for Kubernetes for Kubernetes"
