@@ -25,7 +25,7 @@ spec:
         app: {{ template "console.name" . }}
         release: {{ .Release.Name }}
         heritage: {{.Release.Service | quote }}
-    chart: {{ template "console.chart" . }}
+        chart: {{ template "console.chart" . }}
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
         seccomp.security.alpha.kubernetes.io/pod: docker/default

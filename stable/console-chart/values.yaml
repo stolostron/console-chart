@@ -53,30 +53,30 @@ consoleapi:
       memory: "512Mi"
       cpu: "100m"
 
-  consoleheader:
-    ingressPath: '/multicloud/header'
-    image:
-      repository: quay.io/open-cluster-management/console-header
-      name: console-header
-      tag: 1.0.0
-      pullPolicy: Always
-    resources:
-      requests:
-        memory: "256Mi"
-        cpu: "200m"
-      limits:
-        memory: "512Mi"
-        cpu: "300m"
-    uiconfig:
-      icpText: "Red Hat Advanced Cluster Management for Kubernetes"
-      about:
-        text: "Red Hat Advanced Cluster Management for Kubernetes"
-        logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
-        edition: "Enterprise"
-      header:
-        path: "/multicloud/header/graphics/RHACM-logo.svg"
-        width: "355px"
-        height: "18px"
-        supportUrl: "https://ibm.biz/icpsupport"
-        docUrlMapping: "/examples/header/custom"
-        logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+consoleheader:
+  ingressPath: '/multicloud/header'
+  image:
+    repository: quay.io/open-cluster-management/console-header
+    name: console-header
+    tag: 1.0.0
+    pullPolicy: Always
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "200m"
+    limits:
+      memory: "512Mi"
+      cpu: "300m"
+  uiconfig:
+    icpText: "Red Hat Advanced Cluster Management for Kubernetes"
+    about:
+      text: "Red Hat Advanced Cluster Management for Kubernetes"
+      logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+      edition: "Enterprise"
+    header:
+      path: "/multicloud/header/graphics/RHACM-logo.svg"
+      width: "355px"
+      height: "18px"
+      supportUrl: "https://ibm.biz/icpsupport"
+      docUrlMapping: "/examples/header/custom"
+      logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
