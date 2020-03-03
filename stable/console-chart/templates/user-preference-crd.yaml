@@ -1,6 +1,4 @@
-# Licensed Materials - Property of IBM
-# (C) Copyright IBM Corporation 2020 All Rights Reserved
-# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# Copyright (c) 2020 Red Hat, Inc.
 
 # Dynamic user preference data
 # The CR will be created with the name of the user who will access the information

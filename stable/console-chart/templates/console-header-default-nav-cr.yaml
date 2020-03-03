@@ -1,6 +1,4 @@
-# Licensed Materials - Property of IBM
-# (C) Copyright IBM Corporation 2020 All Rights Reserved
-# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# Copyright (c) 2020 Red Hat, Inc.
 
 apiVersion: console.acm.com/v1
 kind: NavConfiguration
@@ -95,7 +93,7 @@ spec:
     - "chisels, version 9722dbc, GPL"
     - "MongoDB, version 4.0.12, SSPL"
     - "ffi (Ruby Gem), 1.11.1, GPL"
-    copyright: "© 2018, 2019 IBM. All rights reserved."
+    copyright: "© 2019 IBM. All rights reserved. Copyright (c) 2020 Red Hat, Inc."
     version: "1.0.0"
   logoutRedirects:
     - /cemui/logout
