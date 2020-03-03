@@ -72,7 +72,7 @@ spec:
       hostPID: false
       hostIPC: false
       containers:
-        - image: image: "{{ .Values.consoleheader.image.repository}}/{{.Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
+        - image: "{{ .Values.consoleheader.image.repository}}/{{.Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
           resources:
 {{ toYaml .Values.consoleheader.resources | indent 12 }}
           imagePullPolicy: {{ .Values.consoleheader.image.pullPolicy }}
@@ -119,8 +119,6 @@ spec:
               value: "{{ .Values.navPort }}"
             - name: default_admin_user
               value: admin
-            - name: CLUSTER_NAME
-              value: mycluster
             - name: SESSION_POLLING_INTERVAL
               value: "300"
           name: {{ template "console.name" . }}
