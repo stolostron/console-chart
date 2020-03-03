@@ -19,7 +19,7 @@ metadata:
 spec:
   secretName: {{ template "console.fullname" . }}-uiapi-secrets
   issuerRef:
-    name: {{ .Release.Name }}-mcm-server-ca-issuer
+    name: multicluster-hub-mcm-server-ca-issuer
     kind: Issuer
   commonName: {{ template "console.fullname" . }}
   isCA: true
