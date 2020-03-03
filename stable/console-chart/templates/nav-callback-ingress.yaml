@@ -1,0 +1,22 @@
+# Copyright (c) 2020 Red Hat, Inc.
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "console.fullname" . }}-callback
+  labels:
+    app: {{ template "console.fullname" . }}
+    chart: {{ template "console.chart" . }}
+    release: {{ template "console.fullname" . }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    kubernetes.io/ingress.class: "ibm-icp-management"
+    icp.management.ibm.com/upstream-uri: "/auth/liberty/callback"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /auth/liberty/callback
+            backend:
+              serviceName: {{ template "console.fullname" . }}
+              servicePort: 3000

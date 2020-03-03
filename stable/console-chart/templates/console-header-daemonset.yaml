@@ -1,0 +1,126 @@
+# Copyright (c) 2020 Red Hat, Inc.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ template "console.name" . }}
+  labels:
+    app: {{ template "console.name" . }}
+    release: {{ .Release.Name }}
+    heritage: {{.Release.Service | quote }}
+    chart: {{ template "console.chart" . }}
+spec:
+  selector:
+    matchLabels:
+      k8s-app: {{ template "console.name" . }}
+  minReadySeconds: 0
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ template "console.name" . }}
+        app: {{ template "console.name" . }}
+        release: {{ .Release.Name }}
+        heritage: {{.Release.Service | quote }}
+    chart: {{ template "console.chart" . }}
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ''
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                {{- range .Values.arch }}
+                - {{ . }}
+                {{- end }}
+      volumes:
+      - name: log4js
+        configMap:
+          name: {{ template "console.fullname" . }}-log4js
+          items:
+          - key: log4js.json
+            path: log4js.json
+      - name: cluster-ca
+        secret:
+          defaultMode: 420
+          items:
+          - key: tls.key
+            path: ca.key
+          - key: tls.crt
+            path: ca.crt
+          secretName: cluster-ca-cert
+      terminationGracePeriodSeconds: 60
+      nodeSelector:
+        master: "true"
+      tolerations:
+      - key: "dedicated"
+        operator: "Exists"
+        effect: "NoSchedule"
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      containers:
+        - image: "{{ .Values.consoleheader.image.repository}}/{{.Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
+          resources:
+{{ toYaml .Values.consoleheader.resources | indent 12 }}
+          imagePullPolicy: {{ .Values.consoleheader.image.pullPolicy }}
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+{{- if not (.Capabilities.APIVersions.Has "security.openshift.io/v1") }}
+            runAsUser: 10010100001
+{{- end }}
+            capabilities:
+              add:
+              - NET_BIND_SERVICE
+              drop:
+              - ALL
+          readinessProbe:
+            httpGet:
+              path: /readinessProbe
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 50
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /livenessProbe
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 50
+            periodSeconds: 30
+          volumeMounts:
+          - name: log4js
+            mountPath: /etc/config
+          - mountPath: /opt/app-root/console-header/certs
+            name: cluster-ca
+          env:
+            - name: headerContextPath
+              value: {{ .Values.consoleheader.ingressPath}}
+            - name: headerUrl
+              value: {{ .Values.cfcRouterUrl }}
+            - name: NODE_EXTRA_CA_CERTS
+              value: /opt/app-root/console-header/certs/ca.crt
+            - name: NAV_PORT
+              value: "{{ .Values.navPort }}"
+            - name: default_admin_user
+              value: admin
+            - name: SESSION_POLLING_INTERVAL
+              value: "300"
+          name: {{ template "console.name" . }}
+      {{- if .Values.pullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.pullSecret }}
+      {{- end }}
