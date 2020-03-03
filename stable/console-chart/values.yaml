@@ -74,7 +74,7 @@ consoleheader:
       logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
       edition: "Enterprise"
     header:
-      path: "/multicloud/header/graphics/RHACM-logo.svg"
+      path: "/multicloud/header/graphics/RHACM-Logo.svg"
       width: "355px"
       height: "18px"
       supportUrl: "https://ibm.biz/icpsupport"
