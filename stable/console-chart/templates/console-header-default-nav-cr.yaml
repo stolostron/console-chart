@@ -21,7 +21,7 @@ spec:
     logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
     docUrlMapping: "https://www.ibm.com/support/knowledgecenter/SSFC4F_1.2.0/kc_welcome_cloud_pak.html"
     supportUrl: "https://ibm.biz/icpsupport"
-    gettingStartedUrl: "/multicloud/welcome"
+    gettingStartedUrl: "/multicloud/header/welcome"
   about:
     logoUrl: "/multicloud/header/graphics/MCM-AboutModal-TextLogo.svg"
     logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
