@@ -56,10 +56,8 @@ spec:
             path: ca.key
           - key: tls.crt
             path: ca.crt
-          secretName: cluster-ca-cert
+          secretName: multicloud-ca-cert
       terminationGracePeriodSeconds: 60
-      nodeSelector:
-        master: "true"
       tolerations:
       - key: "dedicated"
         operator: "Exists"
