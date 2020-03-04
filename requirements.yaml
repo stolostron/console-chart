@@ -1,0 +1,6 @@
+# requirements.yaml
+dependencies:
+- name: console-crd
+  version: "1.0.0"
+  repository: "file://console-crd"
+  alias: crd
