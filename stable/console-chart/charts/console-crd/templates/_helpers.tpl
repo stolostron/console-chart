@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Red Hat, Inc.
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
