@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Red Hat, Inc.
+
 apiVersion: v1
 appVersion: 0.1.0
 version: 1.0.0
