@@ -45,7 +45,6 @@ spec:
       hostIPC: false
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1001010000
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
