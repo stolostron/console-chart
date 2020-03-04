@@ -58,8 +58,6 @@ spec:
             path: ca.crt
           secretName: cluster-ca-cert
       terminationGracePeriodSeconds: 60
-      nodeSelector:
-        master: "true"
       tolerations:
       - key: "dedicated"
         operator: "Exists"
