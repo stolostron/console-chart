@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ template "console.name" . }}
+  name: {{ template "console.fullname" . }}
   labels:
     app: {{ template "console.name" . }}
     release: {{ .Release.Name }}
@@ -68,7 +68,8 @@ spec:
       hostPID: false
       hostIPC: false
       containers:
-        - image: "{{ .Values.consoleheader.image.repository}}/{{.Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
+        - name: console-header
+          image: "{{ .Values.consoleheader.image.repository}}/{{.Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
           resources:
 {{ toYaml .Values.consoleheader.resources | indent 12 }}
           imagePullPolicy: {{ .Values.consoleheader.image.pullPolicy }}
@@ -114,7 +115,6 @@ spec:
               value: admin
             - name: SESSION_POLLING_INTERVAL
               value: "300"
-          name: {{ template "console.name" . }}
       {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
