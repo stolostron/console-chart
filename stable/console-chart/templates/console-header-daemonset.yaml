@@ -56,7 +56,7 @@ spec:
             path: ca.key
           - key: tls.crt
             path: ca.crt
-          secretName: cluster-ca-cert
+          secretName: multicloud-ca-cert
       terminationGracePeriodSeconds: 60
       tolerations:
       - key: "dedicated"
