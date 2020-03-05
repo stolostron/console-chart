@@ -3,16 +3,16 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ template "console.fullname" . }}
+  name: console-header
   labels:
-    app: {{ template "console.name" . }}
+    app: console-header
     release: {{ .Release.Name }}
     heritage: {{.Release.Service | quote }}
     chart: {{ template "console.chart" . }}
 spec:
   selector:
     matchLabels:
-      k8s-app: {{ template "console.name" . }}
+      k8s-app: console-header
   minReadySeconds: 0
   updateStrategy:
     type: RollingUpdate
@@ -21,8 +21,8 @@ spec:
   template:
     metadata:
       labels:
-        k8s-app: {{ template "console.name" . }}
-        app: {{ template "console.name" . }}
+        k8s-app: console-header
+        app: console-header
         release: {{ .Release.Name }}
         heritage: {{.Release.Service | quote }}
         chart: {{ template "console.chart" . }}

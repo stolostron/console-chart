@@ -3,10 +3,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "console.fullname" . }}
+  name: console-header
   labels:
-    app: {{ template "console.name" . }}
-    component: "consoleheader"
+    app: console-header
+    component: "console-header"
     chart: {{ template "console.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service | quote }}
@@ -21,6 +21,6 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "console.name" . }}
-    component: "consoleheader"
+    app: console-header
+    component: "console-header"
     release: {{ .Release.Name }}
