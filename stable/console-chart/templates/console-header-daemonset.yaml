@@ -44,7 +44,7 @@ spec:
       volumes:
       - name: log4js
         configMap:
-          name: {{ template "console.fullname" . }}-log4js
+          name: console-header-log4js
           items:
           - key: log4js.json
             path: log4js.json
