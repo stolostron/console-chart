@@ -6,7 +6,7 @@ metadata:
   name: console-header
   labels:
     app: console-header
-    component: "consoleheader"
+    component: "console-header"
     chart: {{ template "console.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service | quote }}
@@ -22,5 +22,5 @@ spec:
       name: http
   selector:
     app: console-header
-    component: "consoleheader"
+    component: "console-header"
     release: {{ .Release.Name }}
