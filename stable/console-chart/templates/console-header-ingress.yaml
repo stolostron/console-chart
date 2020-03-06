@@ -13,6 +13,7 @@ metadata:
   name: console-header
   labels:
     app: console-header
+    component: "console-header"
     release: {{ .Release.Name }}
     heritage: {{.Release.Service | quote }}
     chart: {{ template "console.chart" . }}
