@@ -3,9 +3,9 @@ kind: ConsoleLink
 metadata:
   name: acm-console-link
 spec:
-  href: https://multicloud-console.apps.OCPHOST
+  href: https://multicloud-console.apps.{{ .Values.ocphost }}
   location: ApplicationMenu
   text: Red Hat Advanced Cluster Management
   applicationMenu:
     section: Red Hat Applications
-    imageURL: https://multicloud-console.apps.OCPHOST/multicloud/header/graphics/RHACM-logo_24x24.svg
+    imageURL: https://multicloud-console.apps.{{ .Values.ocphost }}/multicloud/header/graphics/RHACM-logo_24x24.svg
