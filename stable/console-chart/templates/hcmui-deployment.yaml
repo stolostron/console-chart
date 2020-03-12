@@ -86,7 +86,7 @@ spec:
           readOnlyRootFilesystem: true
         env:
         - name: hcmUiApiUrl
-          value: https://{{ template "console.fullname" . }}-consoleapi:4000/hcmuiapi
+          value: https://console-api:4000/hcmuiapi
         - name: searchApiUrl
           value: https://search-search-api:4010/searchapi
         - name: cfcRouterUrl
