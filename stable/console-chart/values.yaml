@@ -27,7 +27,7 @@ navPort: 443
 
 enabled: true
 
-ocphost: ""
+ocpingress: ""
 
 consoleui:
   image:
