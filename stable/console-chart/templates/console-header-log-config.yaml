@@ -6,6 +6,7 @@ metadata:
   name: console-header-log4js
   labels:
     app: console-header
+    component: "console-header"
     chart: {{ template "console.chart" . }}
     release: {{ template "console.fullname" . }}
     heritage: {{ .Release.Service }}
