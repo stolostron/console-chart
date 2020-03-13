@@ -12,6 +12,11 @@ metadata:
     chart: {{ template "console.chart" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      k8s-app: console-header
+      app: console-header
+      component: "console-header"
   template:
     metadata:
       labels:
