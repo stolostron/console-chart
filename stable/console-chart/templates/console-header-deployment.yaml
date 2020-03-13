@@ -11,7 +11,7 @@ metadata:
     heritage: {{.Release.Service | quote }}
     chart: {{ template "console.chart" . }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       k8s-app: console-header
