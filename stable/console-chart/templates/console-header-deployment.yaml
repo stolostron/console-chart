@@ -17,6 +17,10 @@ spec:
       k8s-app: console-header
       app: console-header
       component: "console-header"
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   template:
     metadata:
       labels:
