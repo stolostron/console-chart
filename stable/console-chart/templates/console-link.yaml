@@ -1,0 +1,11 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: acm-console-link
+spec:
+  href: https://multicloud-console.{{ .Values.ocpingress }}
+  location: ApplicationMenu
+  text: Red Hat Advanced Cluster Management
+  applicationMenu:
+    section: Red Hat Applications
+    imageURL: https://multicloud-console.{{ .Values.ocpingress }}/multicloud/header/graphics/RHACM-logo_24x24.svg

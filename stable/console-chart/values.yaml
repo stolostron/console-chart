@@ -27,6 +27,8 @@ navPort: 443
 
 enabled: true
 
+ocpingress: ""
+
 consoleui:
   image:
     repository: quay.io/open-cluster-management/console-ui
