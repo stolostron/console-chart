@@ -1,7 +1,7 @@
 # Copyright (c) 2020 Red Hat, Inc.
 
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: console-header
   labels:
@@ -10,14 +10,7 @@ metadata:
     heritage: {{.Release.Service | quote }}
     chart: {{ template "console.chart" . }}
 spec:
-  selector:
-    matchLabels:
-      k8s-app: console-header
-  minReadySeconds: 0
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
