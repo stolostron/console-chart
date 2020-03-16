@@ -3,13 +3,17 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: console-header-config
+  name: {{ template "console.fullname" . }}-console-header-config
   labels:
-    app: console-header
-    component: "console-header"
+    app: {{ template "console.name" . }}
     chart: {{ template "console.chart" . }}
-    release: {{ template "console.fullname" . }}
+    component: "consoleheaderconfig"
+    release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
 data:
   ui-config.json: |-
     {

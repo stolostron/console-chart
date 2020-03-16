@@ -3,13 +3,17 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: console-header-log4js
+  name: {{ template "console.fullname" . }}-console-header-log4js
   labels:
-    app: console-header
-    component: "console-header"
+    app: {{ template "console.name" . }}
     chart: {{ template "console.chart" . }}
-    release: {{ template "console.fullname" . }}
+    component: "consoleheaderlog4js"
+    release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
 data:
   log4js.json: |
     {

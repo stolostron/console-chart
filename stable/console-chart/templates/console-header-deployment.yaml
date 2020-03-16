@@ -1,22 +1,32 @@
 # Copyright (c) 2020 Red Hat, Inc.
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: console-header
+  name: {{ template "console.fullname" . }}-console-header
   labels:
-    app: console-header
-    component: "console-header"
-    release: {{ .Release.Name }}
-    heritage: {{.Release.Service | quote }}
+    app: {{ template "console.name" . }}
     chart: {{ template "console.chart" . }}
+    component: "consoleheader"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
+<<<<<<< 00dcb36a821bfa182dffe8d15d13294228c27215:stable/console-chart/templates/console-header-deployment.yaml
       k8s-app: console-header
       app: console-header
       component: "console-header"
+=======
+      app: {{ template "console.name" . }}
+      component: "consoleheader"
+      release: {{ .Release.Name }}
+  minReadySeconds: 0
+>>>>>>> Update console-header to run as Deployment:stable/console-chart/templates/console-header-deployment.yaml
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
@@ -24,17 +34,33 @@ spec:
   template:
     metadata:
       labels:
-        k8s-app: console-header
-        app: console-header
-        component: "console-header"
+        app: {{ template "console.name" . }}
+        component: "consoleheader"
         release: {{ .Release.Name }}
-        heritage: {{.Release.Service | quote }}
         chart: {{ template "console.chart" . }}
+        heritage: {{ .Release.Service }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        app.kubernetes.io/name: {{ template "console.name" . }}
+        helm.sh/chart: {{ template "console.chart" . }}
       annotations:
+        productName: "Open Cluster Management - Server"
+        productVersion: "1.0.0"
         scheduler.alpha.kubernetes.io/critical-pod: ''
         seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: component
+                  operator: In
+                  values:
+                  - mcm-controller
+              topologyKey: failure-domain.beta.kubernetes.io/zone
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -48,7 +74,7 @@ spec:
       volumes:
       - name: log4js
         configMap:
-          name: console-header-log4js
+          name: {{ template "console.fullname" . }}-console-header-log4js
           items:
           - key: log4js.json
             path: log4js.json
@@ -66,8 +92,6 @@ spec:
       - key: "dedicated"
         operator: "Exists"
         effect: "NoSchedule"
-      - key: "CriticalAddonsOnly"
-        operator: "Exists"
       hostNetwork: false
       hostPID: false
       hostIPC: false
