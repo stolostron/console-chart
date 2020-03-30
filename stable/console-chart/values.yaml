@@ -40,7 +40,6 @@ consoleui:
       cpu: "100m"
     limits:
       memory: "512Mi"
-      cpu: "300m"
 
 consoleapi:
   image:
@@ -53,7 +52,6 @@ consoleapi:
       cpu: "50m"
     limits:
       memory: "512Mi"
-      cpu: "100m"
 
 consoleheader:
   ingressPath: '/multicloud/header'
@@ -67,7 +65,6 @@ consoleheader:
       cpu: "200m"
     limits:
       memory: "2Gi"
-      cpu: "300m"
   uiconfig:
     icpText: "Red Hat Advanced Cluster Management for Kubernetes"
     about:
