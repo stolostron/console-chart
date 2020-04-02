@@ -73,7 +73,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: hcm-ui-api
-        image: "{{ .Values.consoleapi.image.repository }}:{{ .Values.consoleapi.image.tag }}{{ .Values.imageTagPostfix }}"
+        image: "{{ .Values.consoleapi.image.repository }}/{{ .Values.consoleapi.image.name }}:{{ .Values.consoleapi.image.tag }}{{ .Values.imageTagPostfix }}"
         imagePullPolicy: {{ .Values.consoleapi.image.pullPolicy }}
         resources:
         {{- toYaml .Values.consoleapi.resources | nindent 10 }}

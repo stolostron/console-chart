@@ -31,7 +31,8 @@ ocpingress: ""
 
 consoleui:
   image:
-    repository: quay.io/open-cluster-management/console-ui
+    repository: quay.io/open-cluster-management
+    name: console-ui
     tag: 1.0.0
     pullPolicy: Always
   resources:
@@ -43,7 +44,8 @@ consoleui:
 
 consoleapi:
   image:
-    repository: quay.io/open-cluster-management/console-api
+    repository: quay.io/open-cluster-management
+    name: console-api
     tag: 1.0.0
     pullPolicy: Always
   resources:
@@ -56,7 +58,8 @@ consoleapi:
 consoleheader:
   ingressPath: '/multicloud/header'
   image:
-    repository: quay.io/open-cluster-management/console-header
+    repository: quay.io/open-cluster-management
+    name: console-header
     tag: 1.0.0
     pullPolicy: Always
   resources:
