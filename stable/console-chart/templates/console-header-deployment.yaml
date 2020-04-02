@@ -73,7 +73,7 @@ spec:
       hostIPC: false
       containers:
         - name: console-header
-          image: "{{ .Values.consoleheader.image.repository}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
+          image: "{{ .Values.consoleheader.image.repository}}/{{ .Values.consoleheader.image.name}}:{{ .Values.consoleheader.image.tag }}{{ .Values.imageTagPostfix }}"
           resources:
 {{ toYaml .Values.consoleheader.resources | indent 12 }}
           imagePullPolicy: {{ .Values.consoleheader.image.pullPolicy }}
