@@ -5,7 +5,7 @@ metadata:
 spec:
   href: https://multicloud-console.{{ .Values.ocpingress }}
   location: ApplicationMenu
-  text: Red Hat Advanced Cluster Management
+  text: Red Hat Advanced Cluster Management for Kubernetes
   applicationMenu:
     section: Red Hat Applications
     imageURL: https://multicloud-console.{{ .Values.ocpingress }}/multicloud/header/graphics/RHACM-logo_24x24.svg
