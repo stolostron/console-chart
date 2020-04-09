@@ -9,9 +9,9 @@
 
 imageTagPostfix: ""
 imageShaDigests:
-  consoleui: ""
-  consoleapi: ""
-  consoleheader: ""
+  console_ui: ""
+  console_api: ""
+  console_header: ""
 
 pullSecret: null
 arch:
