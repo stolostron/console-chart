@@ -1,12 +1,18 @@
 # Licensed Materials - Property of IBM
 # (C) Copyright IBM Corporation 2016, 2020 All Rights Reserved
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# Copyright (c) 2020 Red Hat, Inc.
 
 # Default values for console-chart
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 imageTagPostfix: ""
+imageShaDigests:
+  console_ui: ""
+  console_api: ""
+  console_header: ""
+
 pullSecret: null
 arch:
 - amd64
