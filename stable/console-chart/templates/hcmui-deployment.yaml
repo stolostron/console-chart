@@ -1,6 +1,7 @@
 # Licensed Materials - Property of IBM
 # (C) Copyright IBM Corporation 2016, 2019 All Rights Reserved
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# Copyright (c) 2020 Red Hat, Inc.
 
 apiVersion: apps/v1
 kind: Deployment
@@ -73,7 +74,11 @@ spec:
           effect: NoSchedule
       containers:
       - name: hcm-ui
+{{- if .Values.imageShaDigests.consoleui }}
+        image: "{{ .Values.consoleui.image.repository}}/{{ .Values.consoleui.image.name}}@{{ .Values.imageShaDigests.consoleui }}"
+{{- else }}
         image: "{{ .Values.consoleui.image.repository }}/{{ .Values.consoleui.image.name }}:{{ .Values.consoleui.image.tag }}{{ .Values.imageTagPostfix }}"
+{{- end }}
         imagePullPolicy: {{ .Values.consoleui.image.pullPolicy }}
         resources:
         {{- toYaml .Values.consoleui.resources | nindent 10 }}
