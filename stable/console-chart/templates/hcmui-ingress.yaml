@@ -6,9 +6,9 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    icp.management.ibm.com/auth-type: access-token
-    kubernetes.io/ingress.class: ibm-icp-management
-    icp.management.ibm.com/configuration-snippet: |
+    ingress.open-cluster-management.io/auth-type: access-token
+    kubernetes.io/ingress.class: ingress-open-cluster-management
+    ingress.open-cluster-management.io/configuration-snippet: |
         add_header 'X-XSS-Protection' '1' always;
   name: {{ template "console.fullname" . }}-consoleui
   labels:

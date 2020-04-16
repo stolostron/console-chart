@@ -4,8 +4,8 @@ kind: Ingress
 apiVersion: networking.k8s.io/v1beta1
 metadata:
   annotations:
-    icp.management.ibm.com/auth-type: access-token
-    kubernetes.io/ingress.class: ibm-icp-management
+    ingress.open-cluster-management.io/auth-type: access-token
+    kubernetes.io/ingress.class: ingress-open-cluster-management
   name: console-header-welcome
   labels:
     app: console-header

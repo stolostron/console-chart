@@ -4,10 +4,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: ibm-icp-management
-    icp.management.ibm.com/app-root: /multicloud/welcome
-    icp.management.ibm.com/auth-type: access-token
-    icp.management.ibm.com/configuration-snippet: |
+    kubernetes.io/ingress.class: ingress-open-cluster-management
+    ingress.open-cluster-management.io/app-root: /multicloud/welcome
+    ingress.open-cluster-management.io/auth-type: access-token
+    ingress.open-cluster-management.io/configuration-snippet: |
         add_header 'X-XSS-Protection' '1' always;
         add_header Content-Security-Policy "default-src 'none'; font-src 'unsafe-inline' 'self'; script-src 'unsafe-inline' 'self' blob: cdn.segment.com fast.appcues.com; connect-src 'self' https://api.segment.io wss://api.appcues.net https://notify.bugsnag.com; img-src * data:; frame-src 'self' https://my.appcues.com; style-src 'unsafe-inline' 'self' https://fast.appcues.com";
   name: console-header
