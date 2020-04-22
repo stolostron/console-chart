@@ -7,11 +7,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-imageTagPostfix: ""
-imageShaDigests:
-  console_ui: ""
-  console_api: ""
-  console_header: ""
+global:
+  imageOverrides:
+    console_ui: ""
+    console_api: ""
+    console_header: ""
 
 pullSecret: null
 arch:
@@ -37,9 +37,6 @@ ocpingress: ""
 
 consoleui:
   image:
-    repository: quay.io/open-cluster-management
-    name: console-ui
-    tag: 1.0.0
     pullPolicy: Always
   resources:
     requests:
@@ -50,9 +47,6 @@ consoleui:
 
 consoleapi:
   image:
-    repository: quay.io/open-cluster-management
-    name: console-api
-    tag: 1.0.0
     pullPolicy: Always
   resources:
     requests:
@@ -64,9 +58,6 @@ consoleapi:
 consoleheader:
   ingressPath: '/multicloud/header'
   image:
-    repository: quay.io/open-cluster-management
-    name: console-header
-    tag: 1.0.0
     pullPolicy: Always
   resources:
     requests:

@@ -74,11 +74,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: hcm-ui-api
-{{- if .Values.imageShaDigests.console_api }}
-        image: "{{ .Values.consoleapi.image.repository}}/{{ .Values.consoleapi.image.name}}@{{ .Values.imageShaDigests.console_api }}"
-{{- else }}
-        image: "{{ .Values.consoleapi.image.repository }}/{{ .Values.consoleapi.image.name }}:{{ .Values.consoleapi.image.tag }}{{ .Values.imageTagPostfix }}"
-{{- end }}
+        image: {{ .Values.global.imageOverrides.console_api }}
         imagePullPolicy: {{ .Values.consoleapi.image.pullPolicy }}
         resources:
         {{- toYaml .Values.consoleapi.resources | nindent 10 }}
