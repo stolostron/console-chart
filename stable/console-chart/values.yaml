@@ -41,6 +41,8 @@ consoleui:
     name: console-ui
     tag: 1.0.0
     pullPolicy: Always
+  import:
+    name: "cluster-import-template"
   resources:
     requests:
       memory: "256Mi"

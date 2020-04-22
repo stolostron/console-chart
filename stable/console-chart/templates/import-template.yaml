@@ -1,0 +1,57 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.consoleui.import.name }}
+  labels:
+    app: {{ template "console.name" . }}
+    chart: {{ template "console.chart" . }}
+    component: "consoleui"
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
+    config: "cluster-import-template"
+data:
+  import.yaml: |-
+    clusterName: "cluster-name"
+    clusterNamespace: "cluster-namespace"
+
+    clusterLabels:
+      cloud: "auto-detect"
+      vendor: "auto-detect"
+      # environment: "Dev"
+      # region: "US"
+
+    # Configure application management feature
+    applicationManager:
+      enabled: true
+
+    # Configure multicluster GRC policy feature
+    policyController:
+      enabled: true
+
+    # Configure indexing for multicluster search feature
+    searchCollector:
+      enabled: true
+
+    # Configure multicluster service registry feature
+    serviceRegistry:
+      enabled: true
+      dnsSuffix: "mcm.svc"
+      plugins: "kube-service"
+
+    # Configure the CisPolicy controller feature
+    cisController:
+      enabled: false
+
+    # Configure the CertificatePolicy controller feature
+    certPolicyController:
+      enabled: true
+
+    # Configure the IamPolicy controller feature
+    iamPolicyController:
+      enabled: true
+
+    version: "1.0.0"
