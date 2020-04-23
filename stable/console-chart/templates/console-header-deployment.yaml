@@ -76,7 +76,7 @@ spec:
           image: {{ .Values.global.imageOverrides.console_header }}
           resources:
 {{ toYaml .Values.consoleheader.resources | indent 12 }}
-          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.global.pullPolicy }}
           securityContext:
             privileged: false
             readOnlyRootFilesystem: true

@@ -75,7 +75,7 @@ spec:
       containers:
       - name: hcm-ui-api
         image: {{ .Values.global.imageOverrides.console_api }}
-        imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
         {{- toYaml .Values.consoleapi.resources | nindent 10 }}
         securityContext:
