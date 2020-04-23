@@ -12,6 +12,8 @@ global:
     console_ui: ""
     console_api: ""
     console_header: ""
+  image:
+    pullPolicy: Always
 
 pullSecret: null
 arch:
@@ -36,8 +38,6 @@ enabled: true
 ocpingress: ""
 
 consoleui:
-  image:
-    pullPolicy: Always
   resources:
     requests:
       memory: "256Mi"
@@ -46,8 +46,6 @@ consoleui:
       memory: "512Mi"
 
 consoleapi:
-  image:
-    pullPolicy: Always
   resources:
     requests:
       memory: "256Mi"
@@ -57,8 +55,6 @@ consoleapi:
 
 consoleheader:
   ingressPath: '/multicloud/header'
-  image:
-    pullPolicy: Always
   resources:
     requests:
       memory: "256Mi"
