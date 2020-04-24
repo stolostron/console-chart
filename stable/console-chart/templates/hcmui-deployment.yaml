@@ -76,6 +76,9 @@ spec:
       - name: hcm-ui
         image: {{ .Values.global.imageOverrides.console_ui }}
         imagePullPolicy: {{ .Values.global.pullPolicy }}
+        volumeMounts:
+          - name: ui-config
+            mountPath: /etc/config
         resources:
         {{- toYaml .Values.consoleui.resources | nindent 10 }}
         securityContext:
@@ -117,6 +120,10 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
+      volumes:
+        - name: ui-config
+          configMap:
+            name: {{ .Values.consoleui.import.name }}
       {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
