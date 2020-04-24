@@ -12,7 +12,7 @@ global:
     console_ui: ""
     console_api: ""
     console_header: ""
-  pullPolicy: Always
+    pullPolicy: Always
 
 pullSecret: null
 arch:
@@ -37,6 +37,8 @@ enabled: true
 ocpingress: ""
 
 consoleui:
+  import:
+    name: "cluster-import-template"
   resources:
     requests:
       memory: "256Mi"
