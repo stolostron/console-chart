@@ -36,12 +36,6 @@ data:
     searchCollector:
       enabled: true
 
-    # Configure multicluster service registry feature
-    serviceRegistry:
-      enabled: true
-      dnsSuffix: "mcm.svc"
-      plugins: "kube-service"
-
     # Configure the CisPolicy controller feature
     cisController:
       enabled: false
