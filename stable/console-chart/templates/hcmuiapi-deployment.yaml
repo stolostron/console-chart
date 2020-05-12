@@ -38,7 +38,7 @@ spec:
         helm.sh/chart: {{ template "console.chart" . }}
       annotations:
         productName: "Open Cluster Management - Server"
-        productVersion: "1.0.0"
+        productVersion: "2.0.0"
         seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       hostNetwork: false
