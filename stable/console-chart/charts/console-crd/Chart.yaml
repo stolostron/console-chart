@@ -1,8 +1,8 @@
 # Copyright (c) 2020 Red Hat, Inc.
 
 apiVersion: v1
-appVersion: 0.1.0
-version: 1.0.0
+appVersion: 2.0.0
+version: 2.0.0
 description: Create custom resource definitions needed by console
 keywords:
 - amd64

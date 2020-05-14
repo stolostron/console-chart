@@ -3,10 +3,10 @@
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 
 apiVersion: v1
-appVersion: "1.0.0"
+appVersion: "2.0.0"
 description:  Helm chart for Open Cluster Management console UI
 name: console-chart
-version: 1.0.0
+version: 2.0.0
 category: "Development"
 tillerVersion: ">=2.9.1"
 kubeVersion: ">=1.10.0"
