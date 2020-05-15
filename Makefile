@@ -17,8 +17,10 @@ endif
 helm:
 	curl -fksSL https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz | sudo tar --strip-components=1 -xvz -C /usr/local/bin/ linux-amd64/helm
 
+.PHONY: setup
 setup: helm
 	helm init -c
 
+.PHONY: lint
 lint: setup
 	helm lint $(STABLE_CHART)
