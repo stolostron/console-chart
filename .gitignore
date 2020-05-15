@@ -1,1 +1,4 @@
 repo/
+.build-harness-bootstrap
+build-harness
+build-harness-extensions
