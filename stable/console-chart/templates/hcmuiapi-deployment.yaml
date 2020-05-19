@@ -43,6 +43,7 @@ spec:
       hostNetwork: false
       hostPID: false
       hostIPC: false
+      serviceAccountName: {{ template "console.fullname" . }}
       securityContext:
         runAsNonRoot: true
       affinity:
