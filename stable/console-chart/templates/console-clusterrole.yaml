@@ -22,8 +22,16 @@ rules:
   verbs:
   - create
 - apiGroups:
-  - '*'
+  - 'config.openshift.io'
+  - 'console.openshift.io'
+  - 'project.openshift.io'
   resources:
   - '*'
+  verbs:
+  - list
+- apiGroups:
+  - ''
+  resources:
+  - 'services'
   verbs:
   - list
