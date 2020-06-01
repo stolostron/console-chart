@@ -1,0 +1,24 @@
+language: minimal
+
+branches:
+  only:
+    - master
+    - /^release-[0-9]+\..*$/
+
+stages:
+  - lint
+  - release-ff
+
+jobs:
+  include:
+    - stage: lint
+      name: "Lint the Helm chart"
+      script:
+        - make
+        - make lint
+    - stage: release-ff
+      name: "Push commits to current release branch"
+      if: type = push AND branch =~ /^master$/
+      script:
+        - make
+        - make release-ff
