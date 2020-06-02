@@ -55,7 +55,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - console-header
+                  - {{ template "console.name" . }}
           - weight: 35
             podAffinityTerm:
               topologyKey: kubernetes.io/hostname
@@ -64,7 +64,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - console-header
+                  - {{ template "console.name" . }}
       serviceAccountName: {{ template "console.fullname" . }}
       volumes:
       - name: log4js

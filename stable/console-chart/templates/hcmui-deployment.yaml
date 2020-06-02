@@ -67,7 +67,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - console-ui
+                  - {{ template "console.name" . }}
           - weight: 35
             podAffinityTerm:
               topologyKey: kubernetes.io/hostname
@@ -76,7 +76,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - console-ui
+                  - {{ template "console.name" . }}
       tolerations:
         - key: dedicated
           operator: Exists
