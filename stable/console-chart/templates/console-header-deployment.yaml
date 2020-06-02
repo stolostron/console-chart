@@ -44,6 +44,7 @@ spec:
                 {{- range .Values.arch }}
                 - {{ . }}
                 {{- end }}
+            
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 70
@@ -64,6 +65,7 @@ spec:
                   operator: In
                   values:
                   - console-header
+      serviceAccountName: {{ template "console.fullname" . }}
       volumes:
       - name: log4js
         configMap:
