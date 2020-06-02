@@ -45,6 +45,26 @@ spec:
                 {{- range .Values.arch }}
                 - {{ . }}
                 {{- end }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 70
+            podAffinityTerm:
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - console-header
+          - weight: 35
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - console-header
       volumes:
       - name: log4js
         configMap:
@@ -122,4 +142,8 @@ spec:
       {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
+      {{- end }}
+      {{- with .Values.hubconfig.nodeSelector }}
+      nodeSelector:
+      {{ toYaml . | indent 8 }}
       {{- end }}

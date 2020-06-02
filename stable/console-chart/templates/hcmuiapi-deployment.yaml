@@ -59,15 +59,24 @@ spec:
                 {{- end }}
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
+          - weight: 70
             podAffinityTerm:
+              topologyKey: failure-domain.beta.kubernetes.io/zone
               labelSelector:
                 matchExpressions:
-                - key: component
+                - key: app
                   operator: In
                   values:
-                  - consoleapi
-              topologyKey: failure-domain.beta.kubernetes.io/zone
+                  - console-api
+          - weight: 35
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - console-api
       tolerations:
         - key: dedicated
           operator: Exists
@@ -137,12 +146,7 @@ spec:
             path: consoleapi.crt
           - key: tls.key
             path: consoleapi.key
-      {{- if .Values.nodeSelector.enabled }}
+      {{- with .Values.hubconfig.nodeSelector }}
       nodeSelector:
-      {{- if .Values.nodeSelector.os }}
-        "beta.kubernetes.io/os" : {{ .Values.nodeSelector.os }}
-      {{- end }}
-      {{- if .Values.nodeSelector.customLabelSelector }}
-        {{ .Values.nodeSelector.customLabelSelector }} : {{ .Values.nodeSelector.customLabelValue}}
-      {{- end }}
+      {{ toYaml . | indent 8 }}
       {{- end }}
