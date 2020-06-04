@@ -68,6 +68,10 @@ spec:
                   operator: In
                   values:
                   - {{ template "console.name" . }}
+                - key: component
+                  operator: In
+                  values:
+                  - consoleapi
           - weight: 35
             podAffinityTerm:
               topologyKey: kubernetes.io/hostname
@@ -77,6 +81,10 @@ spec:
                   operator: In
                   values:
                   - {{ template "console.name" . }}
+                - key: component
+                  operator: In
+                  values:
+                  - consoleapi
       tolerations:
         - key: dedicated
           operator: Exists

@@ -5,11 +5,14 @@ kind: Deployment
 metadata:
   name: console-header
   labels:
-    app: console-header
+    app: {{ template "console.name" . }}
     component: "console-header"
     release: {{ .Release.Name }}
-    heritage: {{.Release.Service | quote }}
-    chart: {{ template "console.chart" . }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
@@ -56,6 +59,10 @@ spec:
                   operator: In
                   values:
                   - {{ template "console.name" . }}
+                - key: component
+                  operator: In
+                  values:
+                  - console-header
           - weight: 35
             podAffinityTerm:
               topologyKey: kubernetes.io/hostname
@@ -65,6 +72,10 @@ spec:
                   operator: In
                   values:
                   - {{ template "console.name" . }}
+                - key: component
+                  operator: In
+                  values:
+                  - console-header
       serviceAccountName: {{ template "console.fullname" . }}
       volumes:
       - name: log4js
