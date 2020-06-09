@@ -22,15 +22,19 @@ rules:
   verbs:
   - create
 - apiGroups:
+  - 'operators.open-cluster-management.io'
+  resources:
+  - 'multiclusterhubs'
+  verbs:
+  - get
+- apiGroups:
   - 'config.openshift.io'
   - 'console.openshift.io'
   - 'project.openshift.io'
-  - 'operators.open-cluster-management.io'
   resources:
   - 'infrastructures'
   - 'consolelinks'
   - 'projects'
-  - 'multiclusterhubs'
   verbs:
   - list
 - apiGroups:
