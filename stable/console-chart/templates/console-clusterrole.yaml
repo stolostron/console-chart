@@ -25,10 +25,12 @@ rules:
   - 'config.openshift.io'
   - 'console.openshift.io'
   - 'project.openshift.io'
+  - 'operators.open-cluster-management.io'
   resources:
   - 'infrastructures'
   - 'consolelinks'
   - 'projects'
+  - 'multiclusterhubs'
   verbs:
   - list
 - apiGroups:
