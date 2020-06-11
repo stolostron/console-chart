@@ -37,6 +37,7 @@ rules:
   - 'projects'
   verbs:
   - list
+  - get
 - apiGroups:
   - ''
   resources:
