@@ -54,3 +54,10 @@ rules:
   - create
   - get
   - delete
+- apiGroups:
+  - proxy.open-cluster-management.io
+  resources:
+  - clusterstatuses
+  verbs:
+  - get
+  - post
