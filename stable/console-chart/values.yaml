@@ -36,8 +36,6 @@ hubconfig:
   nodeSelector: null
 
 consoleui:
-  import:
-    name: "cluster-import-template"
   resources:
     requests:
       memory: "256Mi"
