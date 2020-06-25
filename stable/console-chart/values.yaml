@@ -20,9 +20,6 @@ arch:
 - ppc64le
 - s390x
 
-replicas: 1
-
-
 compliance:
   mcmNamespace: null
 cfcRouterUrl: "https://management-ingress:443"
@@ -34,6 +31,7 @@ ocpingress: ""
 
 hubconfig:
   nodeSelector: null
+  replicaCount: 1
 
 consoleui:
   resources:
