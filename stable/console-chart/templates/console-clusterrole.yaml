@@ -3,7 +3,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ template "console.fullname" . }}
+  name: {{ .Values.org }}:{{ template "console.name" . }}:clusterrole
   labels:
     app: {{ template "console.name" . }}
     chart: {{ template "console.chart" . }}

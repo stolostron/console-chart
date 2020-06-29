@@ -3,12 +3,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: readonly-clusterimagesets
+  name: {{ .Values.org }}:{{ template "console.name" . }}:readonly-clusterimagesets
 subjects:
 - kind: Group
   name: system:authenticated
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
-  name: aggregate-clusterimagesets-readonly
+  name: {{ .Values.org }}:{{ template "console.name" . }}:aggregate-clusterimagesets-readonly
   apiGroup: rbac.authorization.k8s.io

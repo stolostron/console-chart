@@ -3,7 +3,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "console.fullname" . }}
+  name: {{ .Values.org }}:{{ template "console.name" . }}:clusterrolebinding
   labels:
     app: {{ template "console.name" . }}
     chart: {{ template "console.chart" . }}
@@ -20,5 +20,5 @@ subjects:
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: {{ template "console.fullname" . }}
+  name: {{ .Values.org }}:{{ template "console.name" . }}:clusterrole
   apiGroup: rbac.authorization.k8s.io
