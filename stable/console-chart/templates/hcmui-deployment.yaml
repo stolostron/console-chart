@@ -46,6 +46,7 @@ spec:
       serviceAccountName: {{ template "console.fullname" . }}
       securityContext:
         runAsNonRoot: true
+        runAsUser: 1001
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
