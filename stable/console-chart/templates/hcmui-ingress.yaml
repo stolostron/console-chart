@@ -8,8 +8,6 @@ metadata:
   annotations:
     ingress.open-cluster-management.io/auth-type: access-token
     kubernetes.io/ingress.class: ingress-open-cluster-management
-    ingress.open-cluster-management.io/configuration-snippet: |
-        add_header 'X-XSS-Protection' '1' always;
   name: {{ template "console.fullname" . }}-consoleui
   labels:
     app: {{ template "console.name" . }}
