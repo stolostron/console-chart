@@ -3,7 +3,7 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Values.org }}:{{ .Chart.Name }}:aggregate-clusterimagesets-readonly
+  name: {{ .Values.org }}:{{ .Release.Name }}:aggregate-clusterimagesets-readonly
   labels:
     # Add these permissions to the "view" default role.
     rbac.authorization.k8s.io/aggregate-to-view: "true"
