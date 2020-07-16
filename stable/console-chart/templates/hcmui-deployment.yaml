@@ -107,8 +107,6 @@ spec:
           value: https://console-api:4000/hcmuiapi
         - name: searchApiUrl
           value: https://search-search-api:4010/searchapi
-        - name: cfcRouterUrl
-          value: {{ .Values.cfcRouterUrl }}
         - name: leftNav
           value: {{ .Release.Name }}-nav
         ports:
