@@ -103,8 +103,6 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         env:
-        - name: cfcRouterUrl
-          value: {{ .Values.cfcRouterUrl }}
         - name: hcmApiVersion
           value: V2
         - name: complianceNamespace
