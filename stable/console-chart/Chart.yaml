@@ -9,6 +9,6 @@ name: console-chart
 version: 2.0.0
 category: "Development"
 tillerVersion: ">=2.9.1"
-kubeVersion: ">=1.10.0"
+kubeVersion: ">=1.10.0-0"
 keywords:
   - ui
