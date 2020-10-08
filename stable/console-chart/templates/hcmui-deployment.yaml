@@ -111,6 +111,8 @@ spec:
           value: {{ .Values.cfcRouterUrl }}
         - name: leftNav
           value: {{ .Release.Name }}-nav
+        - name: oauthServerUrl
+          value: https://oauth-openshift.{{ .Values.ocpingress }}
         ports:
         - containerPort: 3000
           protocol: TCP
