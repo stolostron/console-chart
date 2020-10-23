@@ -1,0 +1,28 @@
+# Licensed Materials - Property of IBM
+# (C) Copyright IBM Corporation 2016, 2019 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.open-cluster-management.io/auth-type: access-token
+    kubernetes.io/ingress.class: ingress-open-cluster-management
+  name: {{ template "console.fullname" . }}-console-new
+  labels:
+    app: {{ template "console.name" . }}-new
+    chart: {{ template "console.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ template "console.name" . }}
+    helm.sh/chart: {{ template "console.chart" . }}
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: {{ template "console.fullname" . }}-console-new
+          servicePort: 3000
+        path: /cluster-management
