@@ -36,9 +36,6 @@ spec:
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/name: {{ template "console.name" . }}
         helm.sh/chart: {{ template "console.chart" . }}
-      annotations:
-        productName: "Open Cluster Management - Server"
-        productVersion: "2.0.0"
     spec:
       hostNetwork: false
       hostPID: false
