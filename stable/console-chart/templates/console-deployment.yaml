@@ -104,13 +104,6 @@ spec:
           value: "3000"
         - name: searchApiUrl
           value: https://search-search-api:4010/searchapi
-        - name: CLUSTER_API_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "console.fullname" . }}-console-new
-              key: token
-        - name: GENERATE
-          value: ""
         - name: CLUSTER_API_URL
           value: https://kubernetes.default.svc:443
         - name: FRONTEND_URL
