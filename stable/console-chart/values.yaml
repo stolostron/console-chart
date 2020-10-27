@@ -14,6 +14,7 @@ global:
     console_ui: ""
     console_api: ""
     console_header: ""
+    console: ""
     pullPolicy: Always
 
 pullSecret: null
@@ -34,6 +35,14 @@ ocpingress: ""
 hubconfig:
   nodeSelector: null
   replicaCount: 1
+
+console:
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
 
 consoleui:
   resources:
