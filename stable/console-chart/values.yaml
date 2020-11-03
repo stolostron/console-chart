@@ -82,4 +82,6 @@ consoleheader:
       docUrlMapping: "/examples/header/custom"
       logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
 
-subscription-pause: "false"
+clusterimagesets:
+  subscription-pause: "false"
+  acm-hive-openshift-release-url: "https://github.com/open-cluster-management/acm-hive-openshift-releases.git"

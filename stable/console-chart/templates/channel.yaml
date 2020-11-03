@@ -5,7 +5,7 @@ metadata:
   name: acm-hive-openshift-releases-chn-0
 spec:
   type: Git
-  pathname: https://github.com/open-cluster-management/acm-hive-openshift-releases.git
+  pathname: {{ .Values.clusterimagesets.acm-hive-openshift-release-url }}
   # Disable when using a Public repository
   #secretRef:
   #  name: my-github-secret
