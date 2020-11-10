@@ -82,3 +82,7 @@ consoleheader:
       supportUrl: "https://ibm.biz/icpsupport"
       docUrlMapping: "/examples/header/custom"
       logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+
+clusterImageSets:
+  subscriptionPause: "false"
+  acmHiveOenshiftReleaseUrl: "https://github.com/open-cluster-management/acm-hive-openshift-releases.git"

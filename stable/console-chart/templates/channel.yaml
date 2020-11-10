@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: acm-hive-openshift-releases-chn-0
+spec:
+  type: Git
+  pathname: {{ .Values.clusterImageSets.acmHiveOenshiftReleaseUrl }}
+  # Disable when using a Public repository
+  #secretRef:
+  #  name: my-github-secret
