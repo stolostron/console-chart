@@ -1,6 +1,6 @@
 # Copyright (c) 2020 Red Hat, Inc.
 
-{{- if .Values.global.imageOverrides.console }}
+{{- if .Values.console.install }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

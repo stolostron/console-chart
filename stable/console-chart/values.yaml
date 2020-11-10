@@ -37,6 +37,7 @@ hubconfig:
   replicaCount: 1
 
 console:
+  install: false
   resources:
     requests:
       memory: "256Mi"
