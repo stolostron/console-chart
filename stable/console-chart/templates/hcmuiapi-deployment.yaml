@@ -28,6 +28,7 @@ spec:
     metadata:
       labels:
         app: {{ template "console.name" . }}
+        ocm-antiaffinity-selector: "consoleapi"
         component: "consoleapi"
         release: {{ .Release.Name }}
         chart: {{ template "console.chart" . }}
@@ -64,10 +65,10 @@ spec:
               topologyKey: topology.kubernetes.io/zone
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: ocm-antiaffinity-selector
                   operator: In
                   values:
-                  - {{ template "console.name" . }}
+                  - consoleapi
                 - key: component
                   operator: In
                   values:
@@ -77,10 +78,10 @@ spec:
               topologyKey: kubernetes.io/hostname
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: ocm-antiaffinity-selector
                   operator: In
                   values:
-                  - {{ template "console.name" . }}
+                  - consoleapi
                 - key: component
                   operator: In
                   values:

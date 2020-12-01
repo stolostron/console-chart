@@ -29,6 +29,7 @@ spec:
       labels:
         k8s-app: console-header
         app: console-header
+        ocm-antiaffinity-selector: "consoleheader"
         component: "console-header"
         release: {{ .Release.Name }}
         heritage: {{.Release.Service | quote }}
@@ -55,10 +56,10 @@ spec:
               topologyKey: topology.kubernetes.io/zone
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: ocm-antiaffinity-selector
                   operator: In
                   values:
-                  - {{ template "console.name" . }}
+                  - consoleheader
                 - key: component
                   operator: In
                   values:
@@ -68,10 +69,10 @@ spec:
               topologyKey: kubernetes.io/hostname
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: ocm-antiaffinity-selector
                   operator: In
                   values:
-                  - {{ template "console.name" . }}
+                  - consoleheader
                 - key: component
                   operator: In
                   values:
