@@ -83,8 +83,16 @@ spec:
         - key: dedicated
           operator: Exists
           effect: NoSchedule
+      volumes:
+      - name: {{ template "console.fullname" . }}-console-certs
+        secret:
+          defaultMode: 420
+          secretName: {{ template "console.fullname" . }}-console-certs
       containers:
       - name: console
+        volumeMounts:
+        - mountPath: /app/certs
+          name: {{ template "console.fullname" . }}-console-certs
         image: {{ .Values.global.imageOverrides.console }}
         imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
@@ -108,12 +116,22 @@ spec:
         ports:
         - containerPort: 3000
           protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /livenessProbe
+            port: 3000
+            scheme: HTTPS
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 3
           httpGet:
             path: /readinessProbe
             port: 3000
-            scheme: HTTP
+            scheme: HTTPS
           initialDelaySeconds: 1
           periodSeconds: 10
           successThreshold: 1
