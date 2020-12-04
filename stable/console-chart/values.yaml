@@ -10,21 +10,21 @@
 org: open-cluster-management
 
 global:
-    imageOverrides:
-        console_ui: ""
-        console_api: ""
-        console_header: ""
-        console: ""
-        pullPolicy: Always
+  imageOverrides:
+    console_ui: ""
+    console_api: ""
+    console_header: ""
+    console: ""
+    pullPolicy: Always
 
 pullSecret: null
 arch:
-    - amd64
-    - ppc64le
-    - s390x
+- amd64
+- ppc64le
+- s390x
 
 compliance:
-    mcmNamespace: null
+  mcmNamespace: null
 cfcRouterUrl: "https://management-ingress:443"
 navPort: 443
 
@@ -33,55 +33,55 @@ enabled: true
 ocpingress: ""
 
 hubconfig:
-    nodeSelector: null
-    replicaCount: 1
+  nodeSelector: null
+  replicaCount: 1
 
 console:
-    install: true
-    resources:
-        requests:
-            memory: "80Mi"
-        limits:
-            memory: "128Mi"
+  install: true
+  resources:
+    requests:
+      memory: "128Mi"
+    limits:
+      memory: "256Mi"
 
 consoleui:
-    resources:
-        requests:
-            memory: "256Mi"
-            cpu: "100m"
-        limits:
-            memory: "512Mi"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
 
 consoleapi:
-    resources:
-        requests:
-            memory: "256Mi"
-            cpu: "50m"
-        limits:
-            memory: "512Mi"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "50m"
+    limits:
+      memory: "512Mi"
 
 consoleheader:
-    ingressPath: "/multicloud/header"
-    resources:
-        requests:
-            memory: "256Mi"
-            cpu: "200m"
-        limits:
-            memory: "2Gi"
-    uiconfig:
-        icpText: "Red Hat Advanced Cluster Management for Kubernetes"
-        about:
-            text: "Red Hat Advanced Cluster Management for Kubernetes"
-            logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
-            edition: "Enterprise"
-        header:
-            path: "/multicloud/header/graphics/RHACM-Logo.svg"
-            width: "355px"
-            height: "18px"
-            supportUrl: "https://ibm.biz/icpsupport"
-            docUrlMapping: "/examples/header/custom"
-            logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+  ingressPath: '/multicloud/header'
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "200m"
+    limits:
+      memory: "2Gi"
+  uiconfig:
+    icpText: "Red Hat Advanced Cluster Management for Kubernetes"
+    about:
+      text: "Red Hat Advanced Cluster Management for Kubernetes"
+      logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+      edition: "Enterprise"
+    header:
+      path: "/multicloud/header/graphics/RHACM-Logo.svg"
+      width: "355px"
+      height: "18px"
+      supportUrl: "https://ibm.biz/icpsupport"
+      docUrlMapping: "/examples/header/custom"
+      logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
 
 clusterImageSets:
-    subscriptionPause: "false"
-    acmHiveOenshiftReleaseUrl: "https://github.com/open-cluster-management/acm-hive-openshift-releases.git"
+  subscriptionPause: "false"
+  acmHiveOenshiftReleaseUrl: "https://github.com/open-cluster-management/acm-hive-openshift-releases.git"
