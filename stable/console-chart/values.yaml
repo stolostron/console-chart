@@ -37,12 +37,12 @@ hubconfig:
   replicaCount: 1
 
 console:
-  install: true
   resources:
     requests:
-      memory: "128Mi"
+      memory: "24Mi"
+      cpu: "5m"
     limits:
-      memory: "256Mi"
+      memory: "48Mi"
 
 consoleui:
   resources:
