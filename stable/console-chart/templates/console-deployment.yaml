@@ -1,12 +1,11 @@
 # Copyright (c) 2020 Red Hat, Inc.
 
-{{- if .Values.console.install }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "console.fullname" . }}-console-new
+  name: {{ template "console.fullname" . }}-console-v2
   labels:
-    app: {{ template "console.name" . }}-new
+    app: {{ template "console.name" . }}-v2
     chart: {{ template "console.chart" . }}
     component: "console"
     release: {{ .Release.Name }}
@@ -19,13 +18,13 @@ spec:
   replicas: {{ .Values.hubconfig.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "console.name" . }}-new
+      app: {{ template "console.name" . }}-v2
       component: "console"
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "console.name" . }}-new
+        app: {{ template "console.name" . }}-v2
         component: "console"
         release: {{ .Release.Name }}
         chart: {{ template "console.chart" . }}
@@ -141,4 +140,3 @@ spec:
       nodeSelector:
       {{ toYaml . | indent 8 }}
       {{- end }}
-{{- end }}
