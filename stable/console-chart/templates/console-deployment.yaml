@@ -99,16 +99,14 @@ spec:
         env:
         - name: PORT
           value: "3000"
-        - name: searchApiUrl
-          value: https://search-search-api:4010/searchapi
-        - name: CLUSTER_API_URL
-          value: https://kubernetes.default.svc:443
         - name: FRONTEND_URL
           value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
         - name: BACKEND_URL
           value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
-        - name: OAUTH2_REDIRECT_URL
-          value: https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/login/callback
+        - name: CLUSTER_API_URL
+          value: https://kubernetes.default.svc:443
+        - name: SEARCH_API_URL
+          value: https://search-search-api:4010/searchapi
         ports:
         - containerPort: 3000
           protocol: TCP
