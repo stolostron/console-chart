@@ -100,26 +100,14 @@ spec:
         - name: PORT
           value: "3000"
         - name: FRONTEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management"
         - name: BACKEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management"
         - name: CLUSTER_API_URL
           value: https://kubernetes.default.svc:443
-        - name: SEARCH_API_URL
-          value: https://search-search-api:4010/searchapi
         ports:
         - containerPort: 3000
           protocol: TCP
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /livenessProbe
-            port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 1
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 3
           httpGet:
