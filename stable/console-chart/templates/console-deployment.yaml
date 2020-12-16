@@ -99,29 +99,15 @@ spec:
         env:
         - name: PORT
           value: "3000"
-        - name: searchApiUrl
-          value: https://search-search-api:4010/searchapi
+        - name: FRONTEND_URL
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
+        - name: BACKEND_URL
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
         - name: CLUSTER_API_URL
           value: https://kubernetes.default.svc:443
-        - name: FRONTEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
-        - name: BACKEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
-        - name: OAUTH2_REDIRECT_URL
-          value: https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/login/callback
         ports:
         - containerPort: 3000
           protocol: TCP
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /livenessProbe
-            port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 1
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 3
           httpGet:
