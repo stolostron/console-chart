@@ -25,4 +25,4 @@ spec:
       - backend:
           serviceName: {{ template "console.fullname" . }}-console-v2
           servicePort: 3000
-        path: /cluster-management
+        path: /console
