@@ -94,6 +94,8 @@ spec:
         - mountPath: /app/certs
           name: {{ template "console.fullname" . }}-console-certs
         image: {{ .Values.global.imageOverrides.console }}
+        command: ["node"]
+        args: ["main.js"]
         imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
         {{- toYaml .Values.console.resources | nindent 10 }}

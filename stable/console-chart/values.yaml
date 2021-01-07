@@ -39,10 +39,8 @@ hubconfig:
 console:
   resources:
     requests:
-      memory: "32Mi"
-      cpu: "3m"
-    limits:
       memory: "40Mi"
+      cpu: "3m"
 
 consoleui:
   resources:
