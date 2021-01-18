@@ -5,10 +5,11 @@ kind: Ingress
 metadata:
   annotations:
     ingress.open-cluster-management.io/auth-type: access-token
+    ingress.open-cluster-management.io/secure-backends: "true"
     kubernetes.io/ingress.class: ingress-open-cluster-management
-  name: {{ template "console.fullname" . }}-console-new
+  name: {{ template "console.fullname" . }}-console-v2
   labels:
-    app: {{ template "console.name" . }}-new
+    app: {{ template "console.name" . }}-v2
     chart: {{ template "console.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -21,6 +22,6 @@ spec:
   - http:
       paths:
       - backend:
-          serviceName: {{ template "console.fullname" . }}-console-new
+          serviceName: {{ template "console.fullname" . }}-console-v2
           servicePort: 3000
-        path: /cluster-management
+        path: /multicloud

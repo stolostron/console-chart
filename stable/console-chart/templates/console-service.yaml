@@ -1,11 +1,12 @@
 # Copyright (c) 2020 Red Hat, Inc.
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "console.fullname" . }}-console-new
+  annotations:
+    service.beta.openshift.io/serving-cert-secret-name: {{ template "console.fullname" . }}-console-certs
+  name: {{ template "console.fullname" . }}-console-v2
   labels:
-    app: {{ template "console.name" . }}-new
+    app: {{ template "console.name" . }}-v2
     component: "console"
     chart: {{ template "console.chart" . }}
     release: {{ .Release.Name }}
@@ -21,6 +22,6 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "console.name" . }}-new
+    app: {{ template "console.name" . }}-v2
     component: "console"
     release: {{ .Release.Name }}

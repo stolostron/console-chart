@@ -1,12 +1,11 @@
 # Copyright (c) 2020 Red Hat, Inc.
 
-{{- if .Values.console.install }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "console.fullname" . }}-console-new
+  name: {{ template "console.fullname" . }}-console-v2
   labels:
-    app: {{ template "console.name" . }}-new
+    app: {{ template "console.name" . }}-v2
     chart: {{ template "console.chart" . }}
     component: "console"
     release: {{ .Release.Name }}
@@ -19,13 +18,13 @@ spec:
   replicas: {{ .Values.hubconfig.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "console.name" . }}-new
+      app: {{ template "console.name" . }}-v2
       component: "console"
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "console.name" . }}-new
+        app: {{ template "console.name" . }}-v2
         ocm-antiaffinity-selector: "console"
         component: "console"
         release: {{ .Release.Name }}
@@ -85,9 +84,19 @@ spec:
         - key: dedicated
           operator: Exists
           effect: NoSchedule
+      volumes:
+      - name: {{ template "console.fullname" . }}-console-certs
+        secret:
+          defaultMode: 420
+          secretName: {{ template "console.fullname" . }}-console-certs
       containers:
       - name: console
+        volumeMounts:
+        - mountPath: /app/certs
+          name: {{ template "console.fullname" . }}-console-certs
         image: {{ .Values.global.imageOverrides.console }}
+        command: ["node"]
+        args: ["main.js"]
         imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
         {{- toYaml .Values.console.resources | nindent 10 }}
@@ -101,36 +110,22 @@ spec:
         env:
         - name: PORT
           value: "3000"
-        - name: searchApiUrl
-          value: https://search-search-api:4010/searchapi
+        - name: FRONTEND_URL
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
+        - name: BACKEND_URL
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
         - name: CLUSTER_API_URL
           value: https://kubernetes.default.svc:443
-        - name: FRONTEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
-        - name: BACKEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/"
-        - name: OAUTH2_REDIRECT_URL
-          value: https://multicloud-console.{{ .Values.ocpingress }}/cluster-management/login/callback
         ports:
         - containerPort: 3000
           protocol: TCP
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /livenessProbe
-            port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 30
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 3
           httpGet:
             path: /readinessProbe
             port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 5
+            scheme: HTTPS
+          initialDelaySeconds: 1
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
@@ -142,4 +137,3 @@ spec:
       nodeSelector:
       {{ toYaml . | indent 8 }}
       {{- end }}
-{{- end }}
