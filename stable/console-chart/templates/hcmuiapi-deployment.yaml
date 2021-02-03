@@ -90,6 +90,9 @@ spec:
         - key: dedicated
           operator: Exists
           effect: NoSchedule
+        - effect: NoSchedule 
+          key: node-role.kubernetes.io/infra 
+          operator: Exists
       containers:
       - name: hcm-ui-api
         image: {{ .Values.global.imageOverrides.console_api }}
