@@ -1,4 +1,4 @@
-mainlanguage: minimal
+language: minimal
 
 branches:
   only:
