@@ -1,7 +1,7 @@
 # Licensed Materials - Property of IBM
 # (C) Copyright IBM Corporation 2016, 2019 All Rights Reserved
 # US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
-
+# Copyright IBM, Red Hat, and collected contributors to the OCM project
 apiVersion: v1
 appVersion: "2.0.0"
 description: Helm chart for Open Cluster Management Console
