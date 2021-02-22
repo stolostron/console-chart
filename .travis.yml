@@ -1,8 +1,8 @@
-language: minimal
+mainlanguage: minimal
 
 branches:
   only:
-    - master
+    - main
     - /^release-[0-9]+\..*$/
 
 stages:
@@ -19,14 +19,14 @@ jobs:
         - make lint
     - stage: release-ff
       name: "Push commits to current release branch"
-      if: type = push AND branch =~ /^master$/
+      if: type = push AND branch =~ /^main$/
       script:
         - make
         - make release-ff
     - stage: auto
       name: "Auto trigger mch-repo"
-      if: type = push AND branch =~ /^master$/
-      script: 
-        - git clone --single-branch --branch master https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/multicloudhub-repo.git
+      if: type = push AND branch =~ /^main$/
+      script:
+        - git clone --single-branch --branch main https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/multicloudhub-repo.git
         - cd multicloudhub-repo
         - ./cicd-scripts/chartAutomation.sh console-chart
