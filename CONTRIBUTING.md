@@ -47,24 +47,9 @@ Repo maintainers can assign you an issue or pull request by leaving a
 
 After your PR is ready to commit, please run following commands to check your code.
 ```bash
-make compile
+make
+make lint
 ```
 
-### Testing your change
-Make sure your `kubectl` context is set to your target cluster.
-This will run the code locally:
-#### Controller
-```bash
-./build/_output/cluster-curator-controller
-```
-You will see the log output on the console. Provision a NEW cluster in ACM with `spec.installAttemptsLimit: 0` and you will see the controller launch a job.  Monitor the job with `oc logs jobs/cluster-curator-job-XYZAB` Where the job name is found using `oc get jobs`. The jobs are run in the cluster namespace.
 
-## Build images
-Make sure your code compiled (passed).
-```bash
-export REPO_URL=<REPO_URL>      # quay.io/my-org
-export VERSION=<VERSION>
-make build
-```
-
-Now, you can follow the [getting started guide](./README.md#getting-started) to work with the open-cluster-management cluster-curator-controller repository.
+Now, you can follow the [getting started guide](./README.md#getting-started) to work with the open-cluster-management console-chart repository.
