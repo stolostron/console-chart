@@ -15,19 +15,23 @@ metadata:
     app.kubernetes.io/name: {{ template "console.name" . }}
     helm.sh/chart: {{ template "console.chart" . }}
     component: clusterrole
+
 rules:
+
 - apiGroups:
   - 'authentication.k8s.io'
   resources:
   - 'tokenreviews'
   verbs:
   - create
+
 - apiGroups:
   - 'operator.open-cluster-management.io'
   resources:
   - 'multiclusterhubs'
   verbs:
   - get
+
 - apiGroups:
   - 'config.openshift.io'
   - 'console.openshift.io'
@@ -39,9 +43,62 @@ rules:
   verbs:
   - list
   - get
+
 - apiGroups:
   - ''
   resources:
   - 'services'
   verbs:
   - list
+
+- verbs:
+  - watch
+  apiGroups:
+  - ''
+  resources:
+  - namespaces
+  - secrets
+
+- verbs:
+  - watch
+  apiGroups:
+  - inventory.open-cluster-management.io
+  resources:
+  - baremetalassets
+
+- verbs:
+  - watch
+  apiGroups:
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests
+
+- verbs:
+  - watch
+  apiGroups:
+  - hive.openshift.io
+  resources:
+  - clusterdeployments
+  - clusterimagesets
+
+- verbs:
+  - watch
+  apiGroups:
+  - addon.open-cluster-management.io
+  resources:
+  - clustermanagementaddons
+  - managedclusteraddons
+
+- verbs:
+  - watch
+  apiGroups:
+  - cluster.open-cluster-management.io
+  resources:
+  - managedclusters
+
+- verbs:
+  - watch
+  apiGroups:
+  - internal.open-cluster-management.io
+  resources:
+  - managedclusterinfos
