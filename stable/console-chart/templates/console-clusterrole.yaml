@@ -102,3 +102,10 @@ rules:
   - internal.open-cluster-management.io
   resources:
   - managedclusterinfos
+
+- verbs:
+  - watch
+  apiGroups:
+  - discovery.open-cluster-management.io
+  resources:
+  - discoveryconfigs
