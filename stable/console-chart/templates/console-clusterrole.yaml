@@ -19,35 +19,37 @@ metadata:
 rules:
 
 - apiGroups:
-  - 'authentication.k8s.io'
+  - authentication.k8s.io
   resources:
-  - 'tokenreviews'
+  - tokenreviews
   verbs:
   - create
 
 - apiGroups:
-  - 'operator.open-cluster-management.io'
+  - operator.open-cluster-management.io
   resources:
-  - 'multiclusterhubs'
+  - multiclusterhubs
   verbs:
   - get
 
 - apiGroups:
-  - 'config.openshift.io'
-  - 'console.openshift.io'
-  - 'project.openshift.io'
+  - config.openshift.io
+  - console.openshift.io
+  - project.openshift.io
   resources:
-  - 'infrastructures'
-  - 'consolelinks'
-  - 'projects'
+  - infrastructures
+  - consolelinks
+  - projects
+  - featuregates
   verbs:
   - list
   - get
+  - watch
 
 - apiGroups:
   - ''
   resources:
-  - 'services'
+  - services
   verbs:
   - list
 
@@ -56,7 +58,10 @@ rules:
   apiGroups:
   - ''
   resources:
+  - configmaps
+  - jobs
   - namespaces
+  - pods
   - secrets
 
 - verbs:
@@ -79,7 +84,11 @@ rules:
   - hive.openshift.io
   resources:
   - clusterdeployments
+  - clusterpools
   - clusterimagesets
+  - clusterprovisions
+  - clusterdeprovisions
+  - machinepools
 
 - verbs:
   - watch
@@ -95,6 +104,7 @@ rules:
   - cluster.open-cluster-management.io
   resources:
   - managedclusters
+  - managedclustersets
 
 - verbs:
   - watch
@@ -109,3 +119,11 @@ rules:
   - discovery.open-cluster-management.io
   resources:
   - discoveryconfigs
+  - discoveredclusters
+
+- verbs:
+  - watch
+  apiGroups:
+  - wgpolicyk8s.io
+  resources:
+  - policyreports
