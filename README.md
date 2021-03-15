@@ -3,3 +3,5 @@
 # console-chart
 Open Cluster Management console Helm chart
 
+## References
+`console-chart` is part of the open-cluster-management community. For more information, visit: [open-cluster-management.io](https://open-cluster-management.io)
