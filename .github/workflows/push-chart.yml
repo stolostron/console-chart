@@ -1,0 +1,23 @@
+name: Auto trigger mch-repo
+
+on:
+  push:
+    branches:
+    - release-*
+    paths:
+    - 'stable/console-chart/**'
+
+  workflow_dispatch:
+
+jobs:
+  notify-repo:
+    runs-on: ubuntu-latest
+    steps:
+      # Sends a dispatch event to multicloudhub-repo to trigger an update
+      - name: Notify Repo
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.HUB_REPO_TOKEN }}
+          repository: open-cluster-management/multicloudhub-repo
+          event-type: chart-change
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repository": "${{ github.repository }}"}'
