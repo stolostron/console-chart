@@ -154,8 +154,6 @@ spec:
         secret:
           secretName: {{ template "console.fullname" . }}-uiapi-certs
           items:
-          - key: ca.crt
-            path: consoleapica.crt
           - key: tls.crt
             path: consoleapi.crt
           - key: tls.key
