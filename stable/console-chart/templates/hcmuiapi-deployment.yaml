@@ -152,7 +152,7 @@ spec:
       volumes:
       - name: uiapi-certs
         secret:
-          secretName: {{ template "console.fullname" . }}-uiapi-secrets
+          secretName: {{ template "console.fullname" . }}-uiapi-certs
           items:
           - key: ca.crt
             path: consoleapica.crt

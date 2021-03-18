@@ -7,6 +7,8 @@
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    service.beta.openshift.io/serving-cert-secret-name: {{ template "console.fullname" . }}-uiapi-certs
   name: console-api
   labels:
     app: {{ template "console.name" . }}
