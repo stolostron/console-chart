@@ -19,7 +19,7 @@ helm:
 
 .PHONY: setup
 setup: helm
-	helm init -c
+	helm version
 
 .PHONY: lint
 lint: setup
