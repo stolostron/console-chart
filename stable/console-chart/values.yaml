@@ -13,8 +13,6 @@ org: open-cluster-management
 
 global:
   imageOverrides:
-    console_ui: ""
-    console_api: ""
     console_header: ""
     console: ""
     pullPolicy: Always
@@ -43,22 +41,6 @@ console:
     requests:
       memory: "40Mi"
       cpu: "3m"
-
-consoleui:
-  resources:
-    requests:
-      memory: "60Mi"
-      cpu: "5m"
-    limits:
-      memory: "512Mi"
-
-consoleapi:
-  resources:
-    requests:
-      memory: "80Mi"
-      cpu: "5m"
-    limits:
-      memory: "512Mi"
 
 consoleheader:
   ingressPath: '/multicloud/header'
