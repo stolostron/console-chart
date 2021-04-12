@@ -90,6 +90,7 @@ rules:
   apiGroups:
   - hive.openshift.io
   resources:
+  - clusterclaims
   - clusterdeployments
   - clusterpools
   - clusterimagesets
