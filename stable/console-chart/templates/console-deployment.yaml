@@ -113,9 +113,9 @@ spec:
         - name: PORT
           value: "3000"
         - name: FRONTEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/multicloud"
         - name: BACKEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/multicloud"
         - name: CLUSTER_API_URL
           value: https://kubernetes.default.svc:443
         ports:
