@@ -47,7 +47,6 @@ rules:
   - consolelinks
   - projects
   - featuregates
-  
 
 - verbs:
   - list
@@ -115,6 +114,7 @@ rules:
   resources:
   - managedclusters
   - managedclustersets
+  - clustercurators
 
 - verbs:
   - list
