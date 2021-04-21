@@ -13,11 +13,11 @@ jobs:
   notify-repo:
     runs-on: ubuntu-latest
     steps:
-      # Sends a dispatch event to multicloudhub-repo to trigger an update
+      # Sends a dispatch event to multiclusterhub-repo to trigger an update
       - name: Notify Repo
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.HUB_REPO_TOKEN }}
-          repository: open-cluster-management/multicloudhub-repo
+          repository: open-cluster-management/multiclusterhub-repo
           event-type: chart-change
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repository": "${{ github.repository }}"}'
