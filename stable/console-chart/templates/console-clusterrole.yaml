@@ -48,7 +48,6 @@ rules:
   - projects
   - featuregates
 
-
 - verbs:
   - list
   apiGroups:
