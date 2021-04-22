@@ -2,6 +2,7 @@
 # Copyright (c) 2020 Red Hat, Inc.
 # Copyright Contributors to the Open Cluster Management project
 ###############################################################################
+BEFORE_SCRIPT := $(shell build/before-make.sh)
 
 CHART_NAME ?= console-chart
 STABLE_CHART ?= stable/$(CHART_NAME)
@@ -22,6 +23,13 @@ helm:
 setup: helm
 	helm version
 
+.PHONY: check
+check: check-copyright lint
+
+.PHONY: check-copyright
+check-copyright:
+	@build/check-copyright.sh
+
 .PHONY: lint
-lint: setup
+lint:
 	helm lint $(STABLE_CHART)
