@@ -9,6 +9,11 @@
 # set -x
 TMP_FILE="tmp_file"
 
+if [ ! -f .copyrightignore ]; then
+  echo "File .copyrightignore not found!"
+  exit 1
+fi
+
 ALL_FILES=$(git ls-files | \
  grep -v -f <(sed 's/\([.|]\)/\\\1/g; s/\?/./g ; s/\*/.*/g' .copyrightignore))
 
