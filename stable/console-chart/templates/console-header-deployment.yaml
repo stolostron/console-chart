@@ -86,15 +86,6 @@ spec:
           items:
           - key: log4js.json
             path: log4js.json
-      - name: cluster-ca
-        secret:
-          defaultMode: 420
-          items:
-          - key: tls.key
-            path: ca.key
-          - key: tls.crt
-            path: ca.crt
-          secretName: multicloud-ca-cert
       terminationGracePeriodSeconds: 60
       tolerations:
       - key: "dedicated"
@@ -139,15 +130,11 @@ spec:
           volumeMounts:
           - name: log4js
             mountPath: /etc/config
-          - mountPath: /opt/app-root/console-header/certs
-            name: cluster-ca
           env:
             - name: headerContextPath
               value: {{ .Values.consoleheader.ingressPath}}
             - name: headerUrl
               value: {{ .Values.cfcRouterUrl }}
-            - name: NODE_EXTRA_CA_CERTS
-              value: /opt/app-root/console-header/certs/ca.crt
             - name: NAV_PORT
               value: "{{ .Values.navPort }}"
             - name: default_admin_user
