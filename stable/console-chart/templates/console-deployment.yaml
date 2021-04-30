@@ -133,8 +133,6 @@ spec:
             port: 3000
             scheme: HTTPS
           failureThreshold: 1
-      initialDelaySeconds: 3
-      periodSeconds: 3
       {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
