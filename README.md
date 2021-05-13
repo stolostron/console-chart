@@ -27,9 +27,18 @@ NOTE: The following commands assume a namespace of `open-cluster-management`
 
   helm get values  -n open-cluster-management `helm ls -n open-cluster-management | cut -d' ' -f1 | grep console-chart` > old-values.yaml
 
+  cp stable/console-chart/values.yaml new-values.yaml
+
+  #Edit new-values.yaml and replace the following:
+  #   - global.imageOverrides: with the same section in old-values.yaml
+  #   - ocpingress: with the same section in old-values.yaml
+  #   - pullSecret: with the same section in old-values.yaml
+
   oc delete appsub console-chart-sub  -n open-cluster-management
 
-  helm install console-chart stable/console-chart -f old-values.yaml -n open-cluster-management
+  # You may also need to run:  helm delete console-chart 
+
+  helm install console-chart stable/console-chart -f new-values.yaml -n open-cluster-management
   ```
 
 - Make sure the `helm install` command worked and the console is still working.

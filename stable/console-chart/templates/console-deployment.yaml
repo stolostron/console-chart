@@ -93,11 +93,16 @@ spec:
         secret:
           defaultMode: 420
           secretName: {{ template "console.fullname" . }}-console-certs
+      - name: {{ template "console.fullname" . }}-console-config
+        configMap:
+          name: console-config
       containers:
       - name: console
         volumeMounts:
         - mountPath: /app/certs
           name: {{ template "console.fullname" . }}-console-certs
+        - mountPath: /app/config
+          name: {{ template "console.fullname" . }}-console-config
         image: {{ .Values.global.imageOverrides.console }}
         imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
