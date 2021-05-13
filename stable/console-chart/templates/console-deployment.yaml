@@ -101,7 +101,7 @@ spec:
         volumeMounts:
         - mountPath: /app/certs
           name: {{ template "console.fullname" . }}-console-certs
-        - mountPath: /app/console-config
+        - mountPath: /app/config
           name: {{ template "console.fullname" . }}-console-config
         image: {{ .Values.global.imageOverrides.console }}
         imagePullPolicy: {{ .Values.global.pullPolicy }}
