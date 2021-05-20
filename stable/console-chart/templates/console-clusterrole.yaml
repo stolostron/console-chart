@@ -140,3 +140,11 @@ rules:
   - wgpolicyk8s.io
   resources:
   - policyreports
+
+- verbs:
+  - list
+  - watch
+  apiGroups:
+  - submarineraddon.open-cluster-management.io
+  resources:
+  - submarinerconfigs
