@@ -4,13 +4,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: console-config
-    labels:
-        app: console
-        component: "console"
-        chart: { { template "console.chart" . } }
-        release: { { template "console.fullname" . } }
-        heritage: { { .Release.Service } }
+  name: console-config
+  labels:
+    app: console
+    component: "console"
+    chart: { { template "console.chart" . } }
+    release: { { template "console.fullname" . } }
+    heritage: { { .Release.Service } }
 data:
-    settings: |
-        LOG_LEVEL=info
+  settings: |
+    LOG_LEVEL=info
