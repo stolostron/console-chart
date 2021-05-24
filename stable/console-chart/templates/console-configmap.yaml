@@ -8,9 +8,9 @@ metadata:
   labels:
     app: console
     component: "console"
-    chart: { { template "console.chart" . } }
-    release: { { template "console.fullname" . } }
-    heritage: { { .Release.Service } }
+    chart: {{ template "console.chart" . }}
+    release: {{ template "console.fullname" . }}
+    heritage: {{ .Release.Service }}
 data:
   settings: |
     LOG_LEVEL=info
