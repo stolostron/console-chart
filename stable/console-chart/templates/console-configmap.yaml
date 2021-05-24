@@ -4,15 +4,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: console-config
-  labels:
-    app: console
-    component: "console"
-    chart: {{ template "console.chart" . }}
-    release: {{ template "console.fullname" . }}
-    heritage: {{ .Release.Service }}
+    name: console-config
+    labels:
+        app: console
+        component: "console"
+        chart: { { template "console.chart" . } }
+        release: { { template "console.fullname" . } }
+        heritage: { { .Release.Service } }
 data:
-  CLUSTER_DISCOVERY_FEATURE_ENABLED: "true"
-  CLUSTER_SET_FEATURE_ENABLED: "true"
-  ASSISTED_INSTALLER_FEATURE_ENABLED: "true"
-  LOG_LEVEL: default
+    settings: |
+        LOG_LEVEL=info
