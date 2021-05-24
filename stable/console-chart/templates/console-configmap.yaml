@@ -12,7 +12,5 @@ metadata:
     release: {{ template "console.fullname" . }}
     heritage: {{ .Release.Service }}
 data:
-  CLUSTER_DISCOVERY_FEATURE_ENABLED: "true"
-  CLUSTER_SET_FEATURE_ENABLED: "true"
-  ASSISTED_INSTALLER_FEATURE_ENABLED: "true"
-  LOG_LEVEL: default
+  settings: |
+    LOG_LEVEL=info
