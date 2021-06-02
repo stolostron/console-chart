@@ -114,6 +114,7 @@ rules:
   resources:
   - managedclusters
   - managedclustersets
+  - managedclustersetbindings
   - clustercurators
 
 - verbs:
