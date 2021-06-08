@@ -42,11 +42,13 @@ rules:
   - config.openshift.io
   - console.openshift.io
   - project.openshift.io
+  - tower.ansible.com
   resources:
   - infrastructures
   - consolelinks
   - projects
   - featuregates
+  - ansiblejobs
 
 - verbs:
   - list
