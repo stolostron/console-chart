@@ -13,8 +13,6 @@ org: open-cluster-management
 
 global:
   imageOverrides:
-    console_ui: ""
-    console_api: ""
     console: ""
     pullPolicy: Always
 
@@ -43,6 +41,7 @@ console:
       memory: "40Mi"
       cpu: "3m"
 
+<<<<<<< HEAD
 consoleui:
   resources:
     requests:
@@ -58,6 +57,29 @@ consoleapi:
       cpu: "5m"
     limits:
       memory: "512Mi"
+=======
+consoleheader:
+  ingressPath: '/multicloud/header'
+  resources:
+    requests:
+      memory: "100Mi"
+      cpu: "10m"
+    limits:
+      memory: "2Gi"
+  uiconfig:
+    icpText: "Red Hat Advanced Cluster Management for Kubernetes"
+    about:
+      text: "Red Hat Advanced Cluster Management for Kubernetes"
+      logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+      edition: "Enterprise"
+    header:
+      path: "/multicloud/header/graphics/RHACM-Logo.svg"
+      width: "355px"
+      height: "18px"
+      supportUrl: "https://ibm.biz/icpsupport"
+      docUrlMapping: "/examples/header/custom"
+      logoAltText: "Red Hat Advanced Cluster Management for Kubernetes"
+>>>>>>> b46a98e5f84cda21a3f2ee45ae45a6feba75752d
 
 clusterImageSets:
   subscriptionPause: "false"

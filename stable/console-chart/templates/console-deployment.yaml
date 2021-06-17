@@ -93,11 +93,16 @@ spec:
         secret:
           defaultMode: 420
           secretName: {{ template "console.fullname" . }}-console-certs
+      - name: {{ template "console.fullname" . }}-console-config
+        configMap:
+          name: console-config
       containers:
       - name: console
         volumeMounts:
         - mountPath: /app/certs
           name: {{ template "console.fullname" . }}-console-certs
+        - mountPath: /app/config
+          name: {{ template "console.fullname" . }}-console-config
         image: {{ .Values.global.imageOverrides.console }}
         imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
@@ -113,24 +118,27 @@ spec:
         - name: PORT
           value: "3000"
         - name: FRONTEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/multicloud"
         - name: BACKEND_URL
-          value: "https://multicloud-console.{{ .Values.ocpingress }}/console"
+          value: "https://multicloud-console.{{ .Values.ocpingress }}/multicloud"
         - name: CLUSTER_API_URL
           value: https://kubernetes.default.svc:443
         ports:
         - containerPort: 3000
           protocol: TCP
         readinessProbe:
-          failureThreshold: 3
           httpGet:
             path: /readinessProbe
             port: 3000
             scheme: HTTPS
-          initialDelaySeconds: 1
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+          failureThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /livenessProbe
+            port: 3000
+            scheme: HTTPS
+          failureThreshold: 1
+          initialDelaySeconds: 10
       {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
