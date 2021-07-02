@@ -2,9 +2,9 @@
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
 metadata:
-  name: img4.7.11-x86-64-chart
+  name: img4.6.36-x86-64-chart
   labels:
     channel: fast
     visible: "true"
 spec:
-  releaseImage: quay.io/openshift-release-dev/ocp-release:4.7.11-x86_64
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.6.36-x86_64
