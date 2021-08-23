@@ -151,3 +151,20 @@ rules:
   - submarineraddon.open-cluster-management.io
   resources:
   - submarinerconfigs
+  
+- verbs:
+  - list
+  - watch
+  apiGroups:
+  - extensions.hive.openshift.io
+  resources:
+  - agentclusterinstalls
+  
+- verbs:
+  - list
+  - watch
+  apiGroups:
+  - agent-install.openshift.io
+  resources:
+  - agents
+  - infraenvs
