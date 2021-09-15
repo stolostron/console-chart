@@ -168,3 +168,11 @@ rules:
   resources:
   - agents
   - infraenvs
+
+- verbs:
+  - list
+  - watch
+  apiGroups:
+  - metal3.io/v1alpha1
+  resources:
+  - baremetalhosts
