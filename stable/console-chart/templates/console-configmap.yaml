@@ -12,5 +12,7 @@ metadata:
     release: {{ template "console.fullname" . }}
     heritage: {{ .Release.Service }}
 data:
-  settings: |
-    LOG_LEVEL=info
+  LOG_LEVEL: info
+  ansibleIntegration: disabled
+  singleNodeOpenshift: disabled
+  
