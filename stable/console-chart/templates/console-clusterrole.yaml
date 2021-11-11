@@ -176,3 +176,14 @@ rules:
   - metal3.io
   resources:
   - baremetalhosts
+
+- apiGroups:
+  - policy.open-cluster-management.io
+  - app.k8s.io
+  - apps.open-cluster-management.io
+  - argoproj.io
+  resources:
+  - '*'
+  verbs:
+  - list
+  - watch
