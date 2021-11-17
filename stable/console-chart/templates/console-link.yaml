@@ -9,5 +9,5 @@ spec:
   location: ApplicationMenu
   text: Red Hat Advanced Cluster Management for Kubernetes
   applicationMenu:
-    section: Red Hat Applications
+    section: Red Hat applications
     imageURL: https://multicloud-console.{{ .Values.ocpingress }}/multicloud/favicon.svg
