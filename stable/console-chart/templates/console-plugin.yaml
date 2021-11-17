@@ -1,5 +1,5 @@
 # Copyright Contributors to the Open Cluster Management project
-
+{{ if .Values.plugin }}
 apiVersion: console.openshift.io/v1alpha1
 kind: ConsolePlugin
 metadata:
@@ -17,3 +17,4 @@ spec:
     name: {{ template "console.fullname" . }}-console-v2
     namespace: {{ .Release.Namespace }}
     port: 3000
+{{ end }}
