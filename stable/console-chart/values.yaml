@@ -28,6 +28,7 @@ cfcRouterUrl: "https://management-ingress:443"
 navPort: 443
 
 enabled: true
+plugin: false
 
 ocpingress: ""
 
