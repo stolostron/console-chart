@@ -82,4 +82,4 @@ consoleheader:
 
 clusterImageSets:
   subscriptionPause: "false"
-  acmHiveOenshiftReleaseUrl: "https://github.com/open-cluster-management/acm-hive-openshift-releases.git"
+  acmHiveOenshiftReleaseUrl: "https://github.com/stolostron/acm-hive-openshift-releases.git"
