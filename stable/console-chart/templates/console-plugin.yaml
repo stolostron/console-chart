@@ -9,9 +9,10 @@ spec:
   proxy:
     - type: Service
       alias: console
-      name: {{ template "console.fullname" . }}-console-v2
-      namespace: {{ .Release.Namespace }}
-      port: 3000
+      service:
+        name: {{ template "console.fullname" . }}-console-v2
+        namespace: {{ .Release.Namespace }}
+        port: 3000
       authorize: true
   service:
     basePath: /plugin/
