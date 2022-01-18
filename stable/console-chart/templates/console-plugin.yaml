@@ -7,11 +7,13 @@ metadata:
 spec:
   displayName: Red Hat Advanced Cluster Management
   proxy:
-    services:
-      - authorize: true
+    - type: Service
+      alias: console
+      service:
         name: {{ template "console.fullname" . }}-console-v2
         namespace: {{ .Release.Namespace }}
         port: 3000
+      authorize: true
   service:
     basePath: /plugin/
     name: {{ template "console.fullname" . }}-console-v2
