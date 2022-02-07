@@ -29,3 +29,10 @@ spec:
               number: 3000
         path: /multicloud
         pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: {{ template "console.fullname" . }}-console-v2
+            port:
+              number: 3000
+        path: /
+        pathType: ImplementationSpecific
