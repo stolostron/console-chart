@@ -81,13 +81,10 @@ spec:
                   operator: In
                   values:
                   - console
+      {{- with .Values.hubconfig.tolerations }}
       tolerations:
-        - key: dedicated
-          operator: Exists
-          effect: NoSchedule
-        - effect: NoSchedule
-          key: node-role.kubernetes.io/infra
-          operator: Exists
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
       - name: {{ template "console.fullname" . }}-console-certs
         secret:
@@ -153,5 +150,5 @@ spec:
       {{- end }}
       {{- with .Values.hubconfig.nodeSelector }}
       nodeSelector:
-      {{ toYaml . | indent 8 }}
+      {{- toYaml . | nindent 8 }}
       {{- end }}
