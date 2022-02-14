@@ -1,9 +1,9 @@
 # Copyright Contributors to the Open Cluster Management project
-{{ if .Values.plugin }}
+{{- if include "dynamicPlugins.supported" . }}
 apiVersion: console.openshift.io/v1alpha1
 kind: ConsolePlugin
 metadata:
-  name: acm-plugin
+  name: acm
 spec:
   displayName: Red Hat Advanced Cluster Management
   proxy:

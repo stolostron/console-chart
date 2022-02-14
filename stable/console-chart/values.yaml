@@ -23,14 +23,7 @@ arch:
 - s390x
 - arm64
 
-compliance:
-  mcmNamespace: null
-cfcRouterUrl: "https://management-ingress:443"
-navPort: 443
-
-enabled: true
-plugin: false
-
+ocpVersion: "4.6.0"
 ocpingress: ""
 
 hubconfig:
