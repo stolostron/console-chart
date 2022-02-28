@@ -41,7 +41,7 @@ Create chart name and version as used by the chart label.
 Determine if dynamic plugins can be used.
 */}}
 {{- define "dynamicPlugins.supported" -}}
-{{- $semver := regexSplit "\\." .Values.ocpVersion 3 -}}
+{{- $semver := regexSplit "\\." .Values.hubconfig.ocpVersion 3 -}}
 {{- $x := index $semver 0 | atoi -}}
 {{- $y := index $semver 1 | atoi -}}
 {{- if or (gt $x 4) (and (eq $x 4) (ge $y 10)) -}}

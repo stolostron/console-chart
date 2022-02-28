@@ -23,12 +23,12 @@ arch:
 - s390x
 - arm64
 
-ocpVersion: "4.6.0"
 ocpingress: ""
 
 hubconfig:
   nodeSelector: null
   replicaCount: 1
+  ocpVersion: "4.6.0"
   tolerations:
     - key: dedicated
       operator: Exists
