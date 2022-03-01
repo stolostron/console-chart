@@ -119,6 +119,7 @@ rules:
   - managedclustersetbindings
   - clustercurators
   - placements
+  - placementdecisions
 
 - verbs:
   - list
