@@ -188,6 +188,7 @@ rules:
   - metal3.io
   resources:
   - baremetalhosts
+  - provisionings
 
 - apiGroups:
   - policy.open-cluster-management.io
