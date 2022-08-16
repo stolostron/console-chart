@@ -16,7 +16,7 @@ jobs:
       uses: JakobGray/branch-fast-forward@v0.1.0
       with:
         main_branch: 'main'
-        ff_branch: 'release-2.6'
+        ff_branch: 'release-2.7'
         push_token: 'FF_TOKEN'
       env:
         FF_TOKEN: ${{ secrets.FF_TOKEN }}
