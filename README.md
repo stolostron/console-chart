@@ -1,5 +1,7 @@
 [comment]: # ( Copyright Contributors to the Open Cluster Management project )
 
+> This repository has been deprecated in ACM 2.7.z and later. It has been moved to <https://github.com/stolostron/multiclusterhub-operator> as a sub-package `pkg/templates/charts/toggle/console`.
+
 # console-chart
 
 [![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
